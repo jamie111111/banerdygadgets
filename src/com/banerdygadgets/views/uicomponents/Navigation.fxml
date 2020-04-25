@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.control.Button?>
+<HBox alignment="TOP_RIGHT" prefHeight="94.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.NavigationController">
+    <children>
+        <Label maxWidth="1.7976931348623157E308" text="Nerdygadgets" HBox.hgrow="ALWAYS">
+            <HBox.margin>
+                <Insets top="5.0" />
+            </HBox.margin>
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <Button onAction="#navigateToHome" text="Home">
+            <HBox.margin>
+                <Insets right="5.0" top="5.0" />
+            </HBox.margin>
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Button>
+        <Button  onAction="#navigateToRoute" text="Route">
+            <HBox.margin>
+                <Insets right="5.0" top="5.0" />
+            </HBox.margin>
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Button>
+        <Button onAction="#navigateToBestellingen" text="Bestellingen">
+            <HBox.margin>
+                <Insets right="5.0" top="5.0" />
+            </HBox.margin>
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+        </Button>
+        <Button onAction="#navigateToRetouren" text="Retouren">
+            <HBox.margin>
+                <Insets right="5.0" top="5.0" />
+            </HBox.margin>
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Button>
+    </children>
+</HBox>

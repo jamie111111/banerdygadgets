@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="borderpane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+    <top>
+        <fx:include fx:id="navigation" source="uicomponents/Navigation.fxml"/>
+    </top>
+    <center>
+        <Label text="Dit is de route pagina"/>
+    </center>
+</BorderPane>
