@@ -43,7 +43,7 @@ public class NavigationController implements Initializable {
         try {
             Parent newView = FXMLLoader.load(Main.class.getResource(url));
 
-            Scene newScene = new Scene(newView,600,550);
+            Scene newScene = new Scene(newView,900,600);
 
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setScene(newScene);
