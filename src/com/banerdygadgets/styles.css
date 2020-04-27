@@ -1,0 +1,12 @@
+.button {
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
+}
+.button:hover {
+    -fx-background-color: lightgrey;
+}
+
+.vbox {
+    -fx-border-bottom:1px solid;
+}
+

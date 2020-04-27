@@ -11,9 +11,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("views/mainwindow.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Backoffice app");
         primaryStage.setScene(new Scene(root, 600, 550));
         primaryStage.show();
+
+//        setUserAgentStylesheet(STYLESHEET_CASPIAN);
+
     }
 
 
