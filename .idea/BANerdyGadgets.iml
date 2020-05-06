@@ -8,5 +8,14 @@
     <orderEntry type="jdk" jdkName="Corretto-11" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="javafx" level="application" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/javalib/mysql-connector-java-8.0.19/mysql-connector-java-8.0.19/mysql-connector-java-8.0.19.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

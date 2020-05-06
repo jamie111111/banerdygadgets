@@ -2,11 +2,22 @@
     -fx-background-color:transparent;
     -fx-cursor:hand;
 }
+.btnRetouren {
+    -fx-color:white;
+    -fx-background-color:green;
+    -fx-pref-width:120px;
+    -fx-pref-height:30px;
+    }
+
+ .btnRetouren:hover {
+ -fx-background-color: none;
+  -fx-cursor:hand;
+  -fx-color:black;
+
+ }
 .button:hover {
     -fx-background-color: lightgrey;
 }
 
-.vbox {
-    -fx-border-bottom:1px solid;
-}
+
 

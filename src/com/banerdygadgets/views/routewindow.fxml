@@ -5,7 +5,7 @@
 
 <BorderPane fx:id="borderpane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
     <top>
-        <fx:include fx:id="navigation" source="uicomponents/Navigation.fxml"/>
+        <fx:include fx:id="navigation" source="navigation/Navigation.fxml"/>
     </top>
     <center>
         <GridPane style="-fx-background-color: white;" BorderPane.alignment="CENTER">

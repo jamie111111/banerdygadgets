@@ -9,7 +9,7 @@
 
 <BorderPane fx:id="borderpane" prefHeight="410.0" prefWidth="600.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <fx:include fx:id="navigation" source="uicomponents/Navigation.fxml" />
+      <fx:include fx:id="navigation" source="navigation/Navigation.fxml" />
    </top>
    <center>
       <GridPane style="-fx-background-color: white;" BorderPane.alignment="CENTER">
