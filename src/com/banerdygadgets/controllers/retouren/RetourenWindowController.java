@@ -1,9 +1,8 @@
-package com.banerdygadgets.controllers;
+package com.banerdygadgets.controllers.retouren;
 
 import com.banerdygadgets.Main;
 import com.banerdygadgets.helpers.AlertFactory;
 import com.banerdygadgets.model.DatabaseHandler;
-import com.banerdygadgets.model.DatabaseStringQueries;
 import com.banerdygadgets.model.RetourOrder;
 import com.banerdygadgets.model.Datahelpers;
 import javafx.collections.FXCollections;
@@ -15,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
@@ -27,7 +25,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class retourenwindowController implements Initializable {
+public class RetourenWindowController implements Initializable {
     DatabaseHandler handler;
     @FXML
     StackPane retourStackPane;
@@ -126,7 +124,7 @@ public class retourenwindowController implements Initializable {
         Optional<ButtonType> result = dialog.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             //Haal controller van Dialog op
-            RetourItemDialogController controller = fxmlLoader.getController();
+            RetourOrderDialogController controller = fxmlLoader.getController();
             //Haal ingevoerde retourorder op van in invoervelden
             RetourOrder addedRetourOrder = controller.getRetourOrder();
             Datahelpers.addRetourItem(addedRetourOrder);
@@ -200,7 +198,7 @@ public class retourenwindowController implements Initializable {
             Optional<ButtonType> result = dialog.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 //Haal controller van Dialog op
-                update_retour_item_controller controller = fxmlLoader.getController();
+                RetourOrderUpdateController controller = fxmlLoader.getController();
                 //Haal ingevoerde retourorder op van in invoervelden
                 RetourOrder updatedRetourOrder = controller.getRetourOrder();
                 Datahelpers.updateRetourItem(updatedRetourOrder);

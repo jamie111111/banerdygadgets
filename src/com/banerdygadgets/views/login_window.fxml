@@ -9,6 +9,7 @@
     </top>
     <center>
         <GridPane style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+            <Label text="Hier komt de inlogpagina"/>
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

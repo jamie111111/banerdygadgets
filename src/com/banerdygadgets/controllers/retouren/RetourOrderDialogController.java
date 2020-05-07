@@ -1,4 +1,4 @@
-package com.banerdygadgets.controllers;
+package com.banerdygadgets.controllers.retouren;
 
 import com.banerdygadgets.model.RetourOrder;
 import javafx.collections.FXCollections;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 
-public class RetourItemDialogController {
+public class RetourOrderDialogController {
     private ObservableList<String> statusList = FXCollections.observableArrayList("Aangemeld","In behandeling",
             "Goedgekeurd",
             "Afgekeurd");

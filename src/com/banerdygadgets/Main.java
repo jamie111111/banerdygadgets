@@ -12,7 +12,7 @@ public class Main extends Application {
     private static PreparedStatement insertRetour;
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("views/mainwindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("views/main_window.fxml"));
         primaryStage.setTitle("Backoffice app");
         primaryStage.setScene(new Scene(root, 900, 600));
         primaryStage.show();

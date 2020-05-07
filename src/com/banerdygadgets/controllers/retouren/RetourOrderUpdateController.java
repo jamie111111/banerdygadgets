@@ -1,5 +1,6 @@
-package com.banerdygadgets.controllers;
+package com.banerdygadgets.controllers.retouren;
 
+import com.banerdygadgets.controllers.retouren.RetourenWindowController;
 import com.banerdygadgets.helpers.NumberTextField;
 import com.banerdygadgets.model.RetourOrder;
 import javafx.collections.FXCollections;
@@ -11,7 +12,7 @@ import javafx.scene.control.TextField;
 
 import java.time.LocalDate;
 
-public class update_retour_item_controller {
+public class RetourOrderUpdateController {
     private ObservableList<String> statusList = FXCollections.observableArrayList("Aangemeld","In behandeling",
             "Goedgekeurd",
             "Afgekeurd");
@@ -25,8 +26,8 @@ public class update_retour_item_controller {
     @FXML private void initialize() {
         statusChoiceBox.setItems(statusList);
 
-        if(retourenwindowController.selectedRetourOrder != null) {
-            selectedOrder = retourenwindowController.selectedRetourOrder;
+        if(RetourenWindowController.selectedRetourOrder != null) {
+            selectedOrder = RetourenWindowController.selectedRetourOrder;
             setRetourOrderFields(selectedOrder.getStringRetourNummer(),selectedOrder.getDatumAanmelding(),
                     selectedOrder.getStatus(),
                     selectedOrder.getReden(),selectedOrder.getBestelNummer());

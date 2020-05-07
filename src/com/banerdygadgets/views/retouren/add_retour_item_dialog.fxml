@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import com.banerdygadgets.helpers.NumberTextField?>
-<DialogPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="235.0" prefWidth="527.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.RetourItemDialogController">
+<DialogPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="235.0" prefWidth="527.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.retouren.RetourOrderDialogController">
    <header>
       <Label alignment="CENTER" text="Voeg een retour item toe">
          <font>

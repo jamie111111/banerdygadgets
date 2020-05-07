@@ -1,4 +1,4 @@
-package com.banerdygadgets.controllers;
+package com.banerdygadgets.controllers.navigation;
 import com.banerdygadgets.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,20 +22,20 @@ public class NavigationController implements Initializable {
 
     @FXML
     public void navigateToBestellingen(ActionEvent event) {
-        setWindow("views/bestellingenwindow.fxml", event);
+        setWindow("views/bestellingen/bestellingen_window.fxml", event);
     }
     @FXML
-    public void navigateToHome(ActionEvent event) {
-        setWindow("views/homewindow.fxml", event);
+    public void navigateLogin(ActionEvent event) {
+        setWindow("views/login_window.fxml", event);
     }
     @FXML
     public void navigateToRoute(ActionEvent event) {
-        setWindow("views/routewindow.fxml", event);
+        setWindow("views/routing/route_window.fxml", event);
     }
 
     @FXML
     public void navigateToRetouren(ActionEvent event) {
-        setWindow("views/retourenwindow.fxml", event);
+        setWindow("views/retouren/retouren_window.fxml", event);
     }
 
 

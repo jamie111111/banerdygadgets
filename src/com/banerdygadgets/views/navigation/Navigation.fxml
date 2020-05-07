@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="TOP_RIGHT" prefHeight="45.0" prefWidth="600.0" style="-fx-cursor: hand; -fx-background-color: ACDF87; -fx-border-color: black;" stylesheets="@../../styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.NavigationController">
+<HBox alignment="TOP_RIGHT" prefHeight="45.0" prefWidth="600.0" style="-fx-cursor: hand; -fx-background-color: ACDF87; -fx-border-color: black;" stylesheets="@../../styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.navigation.NavigationController">
     <children>
         <Label maxWidth="1.7976931348623157E308" text="Nerdygadgets" HBox.hgrow="ALWAYS">
             <HBox.margin>
@@ -23,7 +23,8 @@
             <Insets left="10.0" />
          </padding>
         </Label>
-        <Button cacheShape="false" centerShape="false" focusTraversable="false" onAction="#navigateToHome" style="-fx-cursor: hand;" stylesheets="@../../styles.css" text="Home">
+        <Button cacheShape="false" centerShape="false" focusTraversable="false" onAction="#navigateLogin"
+                style="-fx-cursor: hand;" stylesheets="@../../styles.css" text="Aanmelden">
             <HBox.margin>
                 <Insets right="5.0" top="5.0" />
             </HBox.margin>
