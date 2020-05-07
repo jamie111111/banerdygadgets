@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="retourStackPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.retouren.RetourenWindowController">
+   <children>
+        <VBox>
+         <children>
+              <fx:include fx:id="navigation" source="../navigation/Navigation.fxml" />
+            <TableView fx:id="tableviewRetouren" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn fx:id="colRetourNr" prefWidth="75.0" text="Retournr" />
+                  <TableColumn fx:id="colBestelNr" prefWidth="96.0" text="Bestelnr" />
+                <TableColumn fx:id="colDatum" prefWidth="125.0" text="Datum aanmelding" />
+                  <TableColumn fx:id="colReden" minWidth="-1.0" prefWidth="180.0" text="Status" />
+                  <TableColumn fx:id="colStatus" prefWidth="115.0" resizable="false" text="Reden" />
+              </columns>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#handleStatusOption" text="Wijzig status" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </TableView>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" VBox.vgrow="NEVER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#updateRetourOrder" styleClass="btnRetouren" stylesheets="@../../styles.css" text="Update" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="retourDialog" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showRetourDialog" prefHeight="30.0" prefWidth="120.0" styleClass="btnRetouren" stylesheets="@../../styles.css" text="Toevoegen" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="5.0" right="5.0" top="5.0" />
+                     </HBox.margin></Button>
+                  <Button id="Verwijder" fx:id="deleteBtnRetourOrder" mnemonicParsing="false" onAction="#onDeleteRetourOrder" styleClass="btnRetouren" stylesheets="@../../styles.css" text="Verwijder" textFill="WHITE" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>
