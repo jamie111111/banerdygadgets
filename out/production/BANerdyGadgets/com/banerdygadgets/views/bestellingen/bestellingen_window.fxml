@@ -1,35 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-
-            prefHeight="400.0" prefWidth="600.0">
-<top>
-    <fx:include source="../navigation/Navigation.fxml"/>
-</top>
-    <center>
-
-        <GridPane style="-fx-background-color: white;" BorderPane.alignment="CENTER">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-        </GridPane>
-    </center>
-    <left>
-        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: lightgreen;" BorderPane.alignment="CENTER" />
-        <Label text="Bestellingen"/>
-    </left>
-    <bottom>
-        <HBox prefHeight="57.0" prefWidth="600.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER" />
-    </bottom>
-</BorderPane>
+<StackPane fx:id="bestellingStackpane" prefHeight="619.0" prefWidth="861.0"
+           xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.bestellingen.BestellingenController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+          <fx:include source="../navigation/Navigation.fxml" />
+            <TableView fx:id="tableViewBestelling" maxHeight="1.7976931348623157E308" prefHeight="522.0"
+                       prefWidth="861.0">
+              <columns>
+                <TableColumn  fx:id="colBestelNr" prefWidth="75.0" text="Bestelnr" />
+                  <TableColumn fx:id="colKlantNr" prefWidth="75.0" text="Klantnr" />
+                <TableColumn fx:id="colDatum" prefWidth="75.0" text="Datum" />
+                  <TableColumn fx:id="colStatus" prefWidth="75.0" text="Status" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" stylesheets="@../../styles.css">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onUpdateBestelling" styleClass="btn" stylesheets="@../../styles.css" text="Update" />
+                  <Button mnemonicParsing="false" onAction="#onDeleteBestelling" styleClass="btn" stylesheets="@../../styles.css" text="Verwijder">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onAddBestelling" styleClass="btn" stylesheets="@../../styles.css" text="Toevoegen">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onRefreshBestellingen" styleClass="btn" stylesheets="@../../styles.css" text="Refresh" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

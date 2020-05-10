@@ -37,6 +37,10 @@ public class NavigationController implements Initializable {
     public void navigateToRetouren(ActionEvent event) {
         setWindow("views/retouren/retouren_window.fxml", event);
     }
+    @FXML
+    public void navigateToKlanten(ActionEvent event) {
+        setWindow("views/klanten/klanten_view.fxml", event);
+    }
 
 
     private void setWindow(String url, ActionEvent event) {

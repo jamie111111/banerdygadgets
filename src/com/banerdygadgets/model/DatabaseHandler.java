@@ -11,7 +11,7 @@ public final class DatabaseHandler {
     private static Connection conn = null;
     private static Statement stmt = null;
     private static final String hostName = "jdbc:mysql://localhost:3306/";
-    private static final String database = "retouroders";
+    private static final String database = "nerdygadgets";
     private static final String user = "root";
     private static final String password = "";
     private static final String url = hostName + database;

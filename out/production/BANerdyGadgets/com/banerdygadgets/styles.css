@@ -2,17 +2,18 @@
     -fx-background-color:transparent;
     -fx-cursor:hand;
 }
-.btnRetouren {
+.btn {
     -fx-color:white;
     -fx-background-color:green;
     -fx-pref-width:120px;
     -fx-pref-height:30px;
+    -fx-text-fill:white;
     }
 
- .btnRetouren:hover {
+ .btn:hover {
  -fx-background-color: none;
   -fx-cursor:hand;
-  -fx-color:black;
+  -fx-text-fill:black;
 
  }
 .button:hover {

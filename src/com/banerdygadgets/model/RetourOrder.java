@@ -9,6 +9,20 @@ public class RetourOrder {
     private String status;
     private String reden;
     private int bestelNummer;
+    private int klantNummer;
+
+
+
+    public RetourOrder(int retourNummer,LocalDate datumAanmelding, String status, String reden,
+                       int bestelNummer,
+                       int klantNummer) {
+        this.retourNummer = retourNummer;
+        this.datumAanmelding = datumAanmelding;
+        this.status = status;
+        this.reden = reden;
+        this.bestelNummer = bestelNummer;
+        this.klantNummer = klantNummer;
+    }
 
     public RetourOrder(int retourNummer, LocalDate datumAanmelding, String status, String reden, int bestelNummer) {
         this.retourNummer = retourNummer;
@@ -17,11 +31,13 @@ public class RetourOrder {
         this.reden = reden;
         this.bestelNummer = bestelNummer;
     }
-    public RetourOrder(LocalDate datumAanmelding, String status, String reden, int bestelNummer) {
+    public RetourOrder(LocalDate datumAanmelding, String status, String reden, int bestelNummer,
+                       int klantNummer) {
         this.datumAanmelding = datumAanmelding;
         this.status = status;
         this.reden = reden;
         this.bestelNummer = bestelNummer;
+        this.klantNummer = klantNummer;
     }
 
     public int getRetourNummer() {
@@ -73,6 +89,19 @@ public class RetourOrder {
 
     public void setBestelNummer(int bestelNummer) {
         this.bestelNummer = bestelNummer;
+    }
+
+    public int getKlantNummer() {
+        return klantNummer;
+    }
+    public String getStringKlantNummer() {
+        int klantnr = this.klantNummer;
+        String nr = Integer.toString(klantnr);
+        return nr;
+    }
+
+    public void setKlantNummer(int klantNummer) {
+        this.klantNummer = klantNummer;
     }
 
     @Override

@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import java.sql.*;
 
 public class Main extends Application {
-    private static PreparedStatement insertRetour;
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("views/main_window.fxml"));

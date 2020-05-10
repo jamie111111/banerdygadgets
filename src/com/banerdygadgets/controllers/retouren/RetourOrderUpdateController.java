@@ -1,6 +1,5 @@
 package com.banerdygadgets.controllers.retouren;
 
-import com.banerdygadgets.controllers.retouren.RetourenWindowController;
 import com.banerdygadgets.helpers.NumberTextField;
 import com.banerdygadgets.model.RetourOrder;
 import javafx.collections.FXCollections;
@@ -20,6 +19,7 @@ public class RetourOrderUpdateController {
     @FXML private ChoiceBox statusChoiceBox;
     @FXML private TextField redenField;
     @FXML private NumberTextField bestelnummerField;
+    @FXML private NumberTextField klantnrField;
     @FXML private DatePicker datePicker;
     private RetourOrder selectedOrder;
 
@@ -28,9 +28,12 @@ public class RetourOrderUpdateController {
 
         if(RetourenWindowController.selectedRetourOrder != null) {
             selectedOrder = RetourenWindowController.selectedRetourOrder;
-            setRetourOrderFields(selectedOrder.getStringRetourNummer(),selectedOrder.getDatumAanmelding(),
+            setRetourOrderFields(selectedOrder.getRetourNummer(),
+                    selectedOrder.getBestelNummer(),
+                    selectedOrder.getDatumAanmelding(),
                     selectedOrder.getStatus(),
-                    selectedOrder.getReden(),selectedOrder.getBestelNummer());
+                    selectedOrder.getReden(),
+                    selectedOrder.getKlantNummer());
         }
     }
     public RetourOrder getRetourOrder() {
@@ -44,13 +47,16 @@ public class RetourOrderUpdateController {
 
     }
 
-    public void setRetourOrderFields(String retourNummer ,LocalDate date,String reden,String status,
-                                     int bestelnr) {
-        retournummerField.setText(retourNummer);
-        datePicker.setValue(date);
-        redenField.setText(reden);
-        statusChoiceBox.setValue(status);
+    public void setRetourOrderFields(int retourNummer,int bestelnr ,LocalDate date,String status,
+                                     String reden,int klantnr
+                                     ) {
+        retournummerField.setText(Integer.toString(retourNummer));
         bestelnummerField.setText(Integer.toString(bestelnr));
+        datePicker.setValue(date);
+        statusChoiceBox.setValue(status);
+        redenField.setText(reden);
+        klantnrField.setText(Integer.toString(klantnr));
+
     }
 
 }
