@@ -106,6 +106,7 @@ public class KlantenViewController {
                                     " is " +
                                     "succesvol aangepast");
                     loadData();
+                    System.out.println(rs);
                 }
 
             } else {
