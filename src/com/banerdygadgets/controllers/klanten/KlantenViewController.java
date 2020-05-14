@@ -2,6 +2,7 @@ package com.banerdygadgets.controllers.klanten;
 
 import com.banerdygadgets.Main;
 import com.banerdygadgets.helpers.AlertFactory;
+import com.banerdygadgets.helpers.Verzendlijst;
 import com.banerdygadgets.model.DatabaseHandler;
 import com.banerdygadgets.model.Datahelpers;
 import com.banerdygadgets.model.Klant;
@@ -19,7 +20,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 public class KlantenViewController {
-    ObservableList<Klant> klantLijst = FXCollections.observableArrayList();
+    public static ObservableList<Klant> klantLijst = FXCollections.observableArrayList();
 
     @FXML
     StackPane klantStackPane;
@@ -39,10 +40,12 @@ public class KlantenViewController {
 
     public static Klant selectedklant = null;
     public static boolean selectedAddKlant = false;
+    Verzendlijst lijst;
 
     @FXML private void initialize() {
         initCol();
         loadData();
+
     }
 
     private void initCol() {
@@ -76,6 +79,8 @@ public class KlantenViewController {
 
     @FXML
     private void onUpdateKlant() {
+        lijst = new Verzendlijst();
+        lijst.writeList(klantLijst);
         if (tableViewKlant.getSelectionModel().isEmpty()) {
             AlertFactory.showSimpleAlert("Kies klant", "Geen klant geselecteerd");
         } else {
@@ -98,7 +103,7 @@ public class KlantenViewController {
             Optional<ButtonType> result = dialog.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 KlantViewDialogController controller = fxmlLoader.getController();
-                Klant klant = controller.getKlant();
+                Klant klant = controller.getUpdatedKlant();
                 Boolean rs = Datahelpers.updateKlant(klant);
                 if(rs) {
                     AlertFactory.showSimpleAlert("Klantgegevens aangepast",
@@ -107,7 +112,6 @@ public class KlantenViewController {
                                     "succesvol aangepast");
                     loadData();
                 }
-
             } else {
                 System.out.println("Cancel gedrukt");
             }

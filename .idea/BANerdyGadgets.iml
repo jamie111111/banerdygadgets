@@ -17,5 +17,24 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/javalib/google-places-api-java.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://C:/javalib/google-api-client-assembly-1.30.2-1.30.2/google-api-java-client/libs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://C:/javalib/google-api-client-assembly-1.30.2-1.30.2/google-api-java-client/libs" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>

@@ -43,6 +43,8 @@ public class BestellingenController {
         loadData();
     }
 
+
+
     private void initCol() {
         colBestelNr.setCellValueFactory(new PropertyValueFactory<>("bestellingId"));
         colKlantNr.setCellValueFactory(new PropertyValueFactory<>("klantId"));
