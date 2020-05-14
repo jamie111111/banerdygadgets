@@ -52,6 +52,16 @@ public class KlantViewDialogController {
         Klant klant = new Klant(naam,adres,postcode,woonplaats);
         return klant;
     }
+    public Klant getUpdatedKlant() {
+        int klantnr = Integer.parseInt(klantnrField.getText());
+        String naam = fullNameField.getText();
+        String adres = adresField.getText();
+        String postcode = postcodeField.getText().trim();
+        String woonplaats = woonPlaatsField.getText();
+
+        Klant klant = new Klant(klantnr,naam,adres,postcode,woonplaats);
+        return klant;
+    }
 
 
     private void setAddHeaderTitel() {

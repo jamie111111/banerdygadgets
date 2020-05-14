@@ -12,10 +12,9 @@ import java.time.LocalDate;
 
 public class BestellingDialogController {
     private ObservableList<String> statusList = FXCollections.observableArrayList("Kies " +
-                    "status","Aangemeld",
+                    "status","Verzendklaar",
             "In behandeling",
-            "Goedgekeurd",
-            "Afgekeurd");
+            "Backorder");
     @FXML
     private ChoiceBox statusChoiceBox;
     @FXML private DatePicker datePicker;

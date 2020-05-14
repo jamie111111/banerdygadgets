@@ -98,7 +98,7 @@ public class KlantenViewController {
             Optional<ButtonType> result = dialog.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 KlantViewDialogController controller = fxmlLoader.getController();
-                Klant klant = controller.getKlant();
+                Klant klant = controller.getUpdatedKlant();
                 Boolean rs = Datahelpers.updateKlant(klant);
                 if(rs) {
                     AlertFactory.showSimpleAlert("Klantgegevens aangepast",
