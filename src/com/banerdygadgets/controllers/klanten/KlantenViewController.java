@@ -19,7 +19,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 public class KlantenViewController {
-    ObservableList<Klant> klantLijst = FXCollections.observableArrayList();
+    public static ObservableList<Klant> klantLijst = FXCollections.observableArrayList();
 
     @FXML
     StackPane klantStackPane;
@@ -51,6 +51,26 @@ public class KlantenViewController {
         colAdres.setCellValueFactory(new PropertyValueFactory<>("adres"));
         colPostcode.setCellValueFactory(new PropertyValueFactory<>("postcode"));
         colWoonplaats.setCellValueFactory(new PropertyValueFactory<>("woonplaats"));
+    }
+    public static void loadDataOnStartUp() {
+        klantLijst.clear();
+        DatabaseHandler handler = DatabaseHandler.getInstance();
+        String query = "SELECT * FROM klant";
+        ResultSet results = handler.executeQuery(query);
+        try{
+            while (results.next()) {
+                int klantId = results.getInt("klantId");
+                String naam = results.getString("fullName");
+                String adres = results.getString("adres");
+                String postcode = results.getString("postcode");
+                String woonplaats = results.getString("woonplaats");
+                Klant klant = new Klant(klantId,naam,adres,postcode,woonplaats);
+                klantLijst.add(klant);
+
+            }
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
     private void loadData() {
         klantLijst.clear();

@@ -3,13 +3,19 @@
     -fx-cursor:hand;
 }
 .btn {
+         -fx-color:white;
+         -fx-background-color:green;
+         -fx-pref-width:120px;
+         -fx-pref-height:30px;
+         -fx-text-fill:white;
+         }
+.btn-route {
     -fx-color:white;
     -fx-background-color:green;
-    -fx-pref-width:120px;
+    -fx-pref-width:200px;
     -fx-pref-height:30px;
     -fx-text-fill:white;
     }
-
  .btn:hover {
  -fx-background-color: none;
   -fx-cursor:hand;
