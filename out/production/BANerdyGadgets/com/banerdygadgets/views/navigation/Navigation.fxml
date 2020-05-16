@@ -6,64 +6,68 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<HBox alignment="TOP_RIGHT" fillHeight="false" prefHeight="45.0" prefWidth="600.0" style="-fx-cursor: hand; -fx-background-color: ACDF87; -fx-border-color: black;" stylesheets="@../../styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.navigation.NavigationController">
-    <children>
-        <Label maxWidth="1.7976931348623157E308" text="Nerdygadgets" HBox.hgrow="ALWAYS">
-            <HBox.margin>
-                <Insets top="5.0" />
-            </HBox.margin>
-            <font>
-                <Font name="System Bold" size="18.0" />
-            </font>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <padding>
-            <Insets left="10.0" />
-         </padding>
-        </Label>
-        <Button cacheShape="false" centerShape="false" focusTraversable="false" onAction="#navigateLogin" style="-fx-cursor: hand;" stylesheets="@../../styles.css" text="Aanmelden">
-            <HBox.margin>
-                <Insets right="5.0" top="5.0" />
-            </HBox.margin>
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Button>
-        <Button cacheShape="false" centerShape="false" focusTraversable="false" onAction="#navigateToRoute" text="Route">
-            <HBox.margin>
-                <Insets right="5.0" top="5.0" />
-            </HBox.margin>
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Button>
-        <Button focusTraversable="false" onAction="#navigateToBestellingen" text="Bestellingen">
-            <HBox.margin>
-                <Insets right="5.0" top="5.0" />
-            </HBox.margin>
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-        </Button>
-        <Button focusTraversable="false" onAction="#navigateToRetouren" text="Retouren">
-            <HBox.margin>
-                <Insets right="5.0" top="5.0" />
-            </HBox.margin>
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Button>
-      <Button focusTraversable="false" layoutX="523.0" layoutY="16.0" onAction="#navigateToKlanten" text="Klanten">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-         <HBox.margin>
-            <Insets right="5.0" top="5.0" />
-         </HBox.margin>
-      </Button>
-    </children>
-</HBox>
+<VBox xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.navigation.NavigationController">
+   <children>
+      <HBox alignment="TOP_RIGHT" fillHeight="false" prefHeight="45.0" prefWidth="600.0" style="-fx-cursor: hand; -fx-background-color: ACDF87; -fx-border-color: black;" stylesheets="@../../styles.css">
+          <children>
+              <Label maxWidth="1.7976931348623157E308" text="Nerdygadgets" HBox.hgrow="ALWAYS">
+                  <HBox.margin>
+                      <Insets top="5.0" />
+                  </HBox.margin>
+                  <font>
+                      <Font name="System Bold" size="18.0" />
+                  </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+              </Label>
+              <Button cacheShape="false" centerShape="false" focusTraversable="false" onAction="#navigateLogin" style="-fx-cursor: hand;" stylesheets="@../../styles.css" text="Aanmelden">
+                  <HBox.margin>
+                      <Insets right="5.0" top="5.0" />
+                  </HBox.margin>
+                  <font>
+                      <Font name="System Bold" size="14.0" />
+                  </font>
+              </Button>
+              <Button cacheShape="false" centerShape="false" focusTraversable="false" onAction="#navigateToRoute" text="Route">
+                  <HBox.margin>
+                      <Insets right="5.0" top="5.0" />
+                  </HBox.margin>
+                  <font>
+                      <Font name="System Bold" size="14.0" />
+                  </font>
+              </Button>
+              <Button focusTraversable="false" onAction="#navigateToBestellingen" text="Bestellingen">
+                  <HBox.margin>
+                      <Insets right="5.0" top="5.0" />
+                  </HBox.margin>
+                  <font>
+                      <Font name="System Bold" size="14.0" />
+                  </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+              </Button>
+              <Button focusTraversable="false" onAction="#navigateToRetouren" text="Retouren">
+                  <HBox.margin>
+                      <Insets right="5.0" top="5.0" />
+                  </HBox.margin>
+                  <font>
+                      <Font name="System Bold" size="14.0" />
+                  </font>
+              </Button>
+            <Button focusTraversable="false" layoutX="523.0" layoutY="16.0" onAction="#navigateToKlanten" text="Klanten">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+          </children>
+      </HBox>
+   </children>
+</VBox>
