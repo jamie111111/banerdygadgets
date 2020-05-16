@@ -17,10 +17,12 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-public class BestellingenController {
-    ObservableList<Bestelling> bestelLijst = FXCollections.observableArrayList();
+public final class BestellingenController {
+    private static ObservableList<Bestelling> bestelLijst = FXCollections.observableArrayList();
 
     @FXML
     StackPane bestellingStackpane;
@@ -37,6 +39,16 @@ public class BestellingenController {
     TableColumn<Bestelling, String> colStatus;
 
     public static Bestelling selectedBestelling = null;
+
+    public static List<Bestelling> getReadyBestellingen() {
+        List<Bestelling> verzendklaarLijst = new ArrayList<>();
+        for (Bestelling bestelling:bestelLijst) {
+            if(bestelling.getStatus().equals("Verzendklaar")) {
+                verzendklaarLijst.add(bestelling);
+            }
+        }
+        return verzendklaarLijst;
+    }
 
     @FXML private void initialize() {
         initCol();
@@ -69,7 +81,6 @@ public class BestellingenController {
         }
         tableViewBestelling.setItems(bestelLijst);
     }
-
 
     @FXML private void onAddBestelling() {
         Dialog<ButtonType> dialog = new Dialog<>();

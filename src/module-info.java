@@ -11,6 +11,7 @@ module BANerdyGadgets {
     opens com.banerdygadgets.controllers.retouren;
     opens com.banerdygadgets.controllers.bestellingen;
     opens com.banerdygadgets.controllers.klanten;
+    opens com.banerdygadgets.controllers.route;
 
 
     opens com.banerdygadgets.views;

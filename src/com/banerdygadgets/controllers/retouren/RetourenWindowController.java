@@ -21,11 +21,13 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class RetourenWindowController implements Initializable {
-    ObservableList<RetourOrder> retourLijst = FXCollections.observableArrayList();
+    private static ObservableList<RetourOrder> retourLijst = FXCollections.observableArrayList();
 
     DatabaseHandler handler;
     @FXML
@@ -221,7 +223,17 @@ public class RetourenWindowController implements Initializable {
             return selectedRetourOrder;
         }
     }
-
-
+    public static List<RetourOrder> getReadyForDispatchRetourOrders() {
+        List<RetourOrder> retourOrders = new ArrayList<>();
+        for (RetourOrder retourOrder : retourLijst) {
+            if(retourOrder.getStatus().equals("Aangemeld")) {
+                retourOrders.add(retourOrder);
+            }
+        }
+        return retourOrders;
+    }
 }
+
+
+
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import com.banerdygadgets.helpers.NumberTextField?>
+<DialogPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="235.0" prefWidth="527.0"
+            xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.banerdygadgets.controllers.route.RouteWindowDialogController">
+    <header>
+        <Label alignment="CENTER" text="Voer een postcode gebied">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+    </header>
+    <content>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <Label alignment="CENTER" text="Postcode van" />
+            <Label text="Postcode tot" GridPane.rowIndex="1" />
+         <NumberTextField GridPane.columnIndex="1" fx:id="postcodeVanField" />
+         <NumberTextField GridPane.columnIndex="1" fx:id="postcodeTotField" GridPane.rowIndex="1" />
+
+        </GridPane>
+    </content>
+</DialogPane>

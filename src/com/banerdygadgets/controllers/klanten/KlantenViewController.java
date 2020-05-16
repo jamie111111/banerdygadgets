@@ -16,10 +16,11 @@ import javafx.scene.layout.StackPane;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 public class KlantenViewController {
-    public static ObservableList<Klant> klantLijst = FXCollections.observableArrayList();
+    private static ObservableList<Klant> klantLijst = FXCollections.observableArrayList();
 
     @FXML
     StackPane klantStackPane;
@@ -93,6 +94,10 @@ public class KlantenViewController {
         }
         tableViewKlant.setItems(klantLijst);
     }
+    public static List<Klant> getKlanten() {
+        return klantLijst;
+    }
+
 
     @FXML
     private void onUpdateKlant() {

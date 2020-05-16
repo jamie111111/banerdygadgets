@@ -1,8 +1,13 @@
 package com.banerdygadgets.model;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Datahelpers {
 
@@ -152,6 +157,33 @@ public class Datahelpers {
         return false;
     }
 
+    public static List<Klant> getSelectedKlantenWithPostcodeRange(int postcodeVan,
+                                                                  int postcodeTot) {
+        List<Klant> selectedKlantenInPostcodeRange = new ArrayList<>();
+        try {
+            PreparedStatement statement =
+                    DatabaseHandler.getInstance().getConnection().prepareStatement("Select * FROM" +
+                            " klant WHERE postcode BETWEEN ? AND ?");
+            statement.setInt(1,postcodeVan);
+            statement.setInt(2,postcodeTot);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int klantId = resultSet.getInt("klantId");
+                String naam = resultSet.getString("fullName");
+                String adres = resultSet.getString("adres");
+                String postcode = resultSet.getString("postcode");
+                String woonplaats = resultSet.getString("woonplaats");
+                Klant klant = new Klant(klantId,naam,adres,postcode,woonplaats);
+                selectedKlantenInPostcodeRange.add(klant);
+            }
+            System.out.println("returning from datahelpers line 179 :");
+            return selectedKlantenInPostcodeRange;
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
 
     public static void closeStatement(Statement stmt) {
         try {
@@ -169,5 +201,7 @@ public class Datahelpers {
         LocalDate formattedDate = LocalDate.parse(datum,formatter);
         return formattedDate;
     }
+
+
 
 }

@@ -25,4 +25,6 @@ public class Verzendlijst {
             System.out.println(e.getMessage());
         }
     }
+
+
 }

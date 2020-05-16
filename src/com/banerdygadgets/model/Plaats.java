@@ -5,6 +5,7 @@ public class Plaats {
     private String postcode;
     private String woonplaats;
 
+
     public Plaats(String adres, String postcode, String woonplaats) {
         this.adres = adres;
         this.postcode = postcode;

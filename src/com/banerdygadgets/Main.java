@@ -1,7 +1,5 @@
 package com.banerdygadgets;
 
-import com.banerdygadgets.controllers.klanten.KlantenViewController;
-import com.banerdygadgets.helpers.Verzendlijst;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,9 +19,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        KlantenViewController.loadDataOnStartUp();
-        Verzendlijst lijst = new Verzendlijst();
-        lijst.writeList(KlantenViewController.klantLijst);
+
         launch(args);
 
 
