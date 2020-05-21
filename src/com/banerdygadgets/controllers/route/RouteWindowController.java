@@ -4,7 +4,6 @@ import com.banerdygadgets.Main;
 import com.banerdygadgets.controllers.bestellingen.BestellingenController;
 import com.banerdygadgets.controllers.retouren.RetourenWindowController;
 import com.banerdygadgets.helpers.RouteHelpers;
-import com.banerdygadgets.helpers.Verzendlijst;
 import com.banerdygadgets.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,27 +14,52 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-public class RouteWindowController {
+/**
+ *
+ */
+public class RouteWindowController  {
     private static ObservableList<Klant> verzendLijst = FXCollections.observableArrayList();
     private static PostcodeRange postcodeRange;
+    @FXML
+    private ImageView imagePostcodes;
 
     @FXML private StackPane routeWindowPane;
     @FXML private TableView<Klant> verzendlijstTableView;
     @FXML private TableColumn<Klant,Integer> klantNrField;
     @FXML private TableColumn<Klant,String> naamField;
     @FXML private TableColumn<Klant,String> adresField;
+    @FXML private TableColumn<Klant,String> huisnrField;
     @FXML private TableColumn<Klant,String> postcodeField;
     @FXML private TableColumn<Klant,String> woonplaatsField;
+    @FXML private HBox Hbox;
+    @FXML private Pane pane;
 
 
 
-    @FXML private void initialize() {
+    @FXML private void initialize() throws FileNotFoundException {
+        try{
+            FileInputStream input = new FileInputStream("C:/BANerdyGadgets/src/resources" +
+                    "/Postcodes_in_Nederland" +
+                    ".gif");
+            Image image = new Image(input);
+            imagePostcodes.setImage(image);
+        }catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+
         initCol();
        loadData();
     }
@@ -43,11 +67,15 @@ public class RouteWindowController {
         klantNrField.setCellValueFactory(new PropertyValueFactory<>("klantId"));
         naamField.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         adresField.setCellValueFactory(new PropertyValueFactory<>("adres"));
+        huisnrField.setCellValueFactory(new PropertyValueFactory<>("huisnr"));
         postcodeField.setCellValueFactory(new PropertyValueFactory<>("postcode"));
         woonplaatsField.setCellValueFactory(new PropertyValueFactory<>("woonplaats"));
     }
     private void loadData() {
         initCol();
+        klantNrField.setStyle( "-fx-alignment: CENTER;");
+        huisnrField.setStyle( "-fx-alignment: CENTER;");
+        postcodeField.setStyle( "-fx-alignment: CENTER;");
         if(verzendLijst != null) {
             verzendlijstTableView.setItems(verzendLijst);
         }else {
@@ -109,8 +137,19 @@ public class RouteWindowController {
     }
     @FXML
     public void createDispatchList() {
-        Verzendlijst lijst = new Verzendlijst();
-        lijst.writeList(verzendLijst);
+    Testapi.geoCodeApi();
     }
+    public void getOptimalRoute() {
+        System.out.println("presses testbutten");
+        Route route = new Route(Testapi.geoLocaties);
+        FileDriver.printHeading(route);
+        new SimmulatedAnnealing().findRoute(SimmulatedAnnealing.INITIAL_TEMPERATURE, route);
+        FileDriver.printInfo();
+    }
+
+    public static ObservableList<Klant> getVerzendLijst() {
+        return verzendLijst;
+    }
+
 
 }

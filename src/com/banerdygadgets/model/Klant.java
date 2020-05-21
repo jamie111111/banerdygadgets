@@ -4,21 +4,25 @@ public class Klant {
     private int klantId;
     private String fullName;
     private String adres;
+    private String huisnr;
     private String postcode;
     private String woonplaats;
 
 
-    public Klant(int klantId, String fullName, String adres, String postcode, String woonplaats) {
+    public Klant(int klantId, String fullName, String adres, String huisnr,String postcode,
+                 String woonplaats) {
         this.klantId = klantId;
         this.fullName = fullName;
         this.adres = adres;
+        this.huisnr= huisnr;
         this.postcode = postcode;
         this.woonplaats = woonplaats;
     }
 
-    public Klant(String fullName, String adres, String postcode, String woonplaats) {
+    public Klant(String fullName, String adres,String huisnr, String postcode, String woonplaats) {
         this.fullName = fullName;
         this.adres = adres;
+        this.huisnr = huisnr;
         this.postcode = postcode;
         this.woonplaats = woonplaats;
     }
@@ -40,15 +44,25 @@ public class Klant {
     }
 
     public String getAdres() {
-        return adres;
+        String trimmed = adres.replaceAll("\\s+","");
+        return trimmed;
     }
 
     public void setAdres(String adres) {
         this.adres = adres;
     }
 
+    public String getHuisnr() {
+        return huisnr;
+    }
+
+    public void setHuisnr(String huisnr) {
+        this.huisnr = huisnr;
+    }
+
     public String getPostcode() {
-        return postcode;
+        String trimmed = postcode.replaceAll("\\s+","");
+        return trimmed;
     }
 
     public void setPostcode(String postcode) {
@@ -64,7 +78,8 @@ public class Klant {
 
     @Override
     public String toString() {
-        return klantId + ", " + fullName +", " + adres + ", " + postcode +", " + woonplaats;
+        return klantId + ", " + fullName +", " + adres + " "+ huisnr +", "+ postcode +", " +
+                woonplaats;
     }
 
 }

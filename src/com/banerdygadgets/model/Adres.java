@@ -1,13 +1,15 @@
 package com.banerdygadgets.model;
 
-public class Plaats {
+public class Adres {
     private String adres;
+    private String huisnr;
     private String postcode;
     private String woonplaats;
 
 
-    public Plaats(String adres, String postcode, String woonplaats) {
+    public Adres(String adres, String huisnr, String postcode, String woonplaats) {
         this.adres = adres;
+        this.huisnr = huisnr;
         this.postcode = postcode;
         this.woonplaats = woonplaats;
     }

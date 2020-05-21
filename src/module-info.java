@@ -1,7 +1,9 @@
 module BANerdyGadgets {
-    requires javafx.fxml;
+    requires junit;
     requires javafx.controls;
     requires java.sql;
+    requires javafx.fxml;
+    requires gson;
     opens com.banerdygadgets;
 
     opens com.banerdygadgets.model;

@@ -34,6 +34,8 @@ public class KlantenViewController {
     @FXML
     TableColumn<Klant, String> colAdres;
     @FXML
+    TableColumn<Klant, String> colHuisNr;
+    @FXML
     TableColumn<Klant, String> colPostcode;
     @FXML
     TableColumn<Klant, String> colWoonplaats;
@@ -42,6 +44,7 @@ public class KlantenViewController {
     public static boolean selectedAddKlant = false;
 
     @FXML private void initialize() {
+        colKlantNr.setStyle( "-fx-alignment: CENTER;");
         initCol();
         loadData();
     }
@@ -50,6 +53,7 @@ public class KlantenViewController {
         colKlantNr.setCellValueFactory(new PropertyValueFactory<>("klantId"));
         colVolledigeNaam.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         colAdres.setCellValueFactory(new PropertyValueFactory<>("adres"));
+        colHuisNr.setCellValueFactory(new PropertyValueFactory<>("huisnr"));
         colPostcode.setCellValueFactory(new PropertyValueFactory<>("postcode"));
         colWoonplaats.setCellValueFactory(new PropertyValueFactory<>("woonplaats"));
     }
@@ -63,9 +67,10 @@ public class KlantenViewController {
                 int klantId = results.getInt("klantId");
                 String naam = results.getString("fullName");
                 String adres = results.getString("adres");
+                String huisnr = results.getString("huisnr");
                 String postcode = results.getString("postcode");
                 String woonplaats = results.getString("woonplaats");
-                Klant klant = new Klant(klantId,naam,adres,postcode,woonplaats);
+                Klant klant = new Klant(klantId,naam,adres,huisnr,postcode,woonplaats);
                 klantLijst.add(klant);
 
             }
@@ -83,9 +88,10 @@ public class KlantenViewController {
                 int klantId = results.getInt("klantId");
                 String naam = results.getString("fullName");
                 String adres = results.getString("adres");
+                String huisnr = results.getString("huisnr");
                 String postcode = results.getString("postcode");
                 String woonplaats = results.getString("woonplaats");
-                Klant klant = new Klant(klantId,naam,adres,postcode,woonplaats);
+                Klant klant = new Klant(klantId,naam,adres,huisnr,postcode,woonplaats);
                 klantLijst.add(klant);
 
             }

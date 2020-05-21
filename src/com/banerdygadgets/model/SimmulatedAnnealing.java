@@ -2,7 +2,7 @@ package com.banerdygadgets.model;
 
 public class SimmulatedAnnealing {
     public static final double RATE_OF_COOLING = 0.005;
-    public static final double INITIAL_TEMPERATURE = 2;
+    public static final double INITIAL_TEMPERATURE = 999;
     public static final double MIN_TEMPERATURE = 0.99;
 
     public Route findRoute(double temperature, Route currentRoute) {

@@ -1,30 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<StackPane fx:id="routeWindowPane" prefHeight="546.0" prefWidth="885.0" stylesheets="@../../styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.route.RouteWindowController">
+<StackPane fx:id="routeWindowPane" prefHeight="591.0" prefWidth="911.0" stylesheets="@../../styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.route.RouteWindowController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
               <fx:include fx:id="navigation" source="../navigation/Navigation.fxml" />
-            <TableView fx:id="verzendlijstTableView" prefHeight="234.0" prefWidth="885.0">
-              <columns>
-                <TableColumn fx:id="klantNrField" prefWidth="75.0" text="Klantnr" />
-                <TableColumn fx:id="naamField" prefWidth="75.0" text="Naam" />
-                  <TableColumn fx:id="adresField" prefWidth="75.0" text="Adres" />
-                  <TableColumn fx:id="postcodeField" prefWidth="75.0" text="Postcode" />
-                  <TableColumn fx:id="woonplaatsField" prefWidth="75.0" text="Woonplaats" />
-              </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
-            <HBox alignment="CENTER" prefHeight="113.0" prefWidth="885.0" stylesheets="@../../styles.css">
+            <HBox VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox fx:id="Hbox" HBox.hgrow="ALWAYS">
+                     <children>
+                        <TableView fx:id="verzendlijstTableView" prefHeight="236.0" prefWidth="676.0" stylesheets="@../../styles.css">
+                          <columns>
+                            <TableColumn id="center" fx:id="klantNrField" prefWidth="75.0" styleClass="center" text="Klantnr" />
+                            <TableColumn fx:id="naamField" prefWidth="75.0" text="Naam" />
+                              <TableColumn fx:id="adresField" prefWidth="75.0" text="Adres" />
+                              <TableColumn fx:id="huisnrField" prefWidth="75.0" text="Huisnr" />
+                              <TableColumn fx:id="postcodeField" prefWidth="75.0" text="Postcode" />
+                              <TableColumn fx:id="woonplaatsField" prefWidth="75.0" text="Woonplaats" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="imagePostcodes" fitHeight="241.0" fitWidth="210.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../../../resources/Postcodes_in_Nederland.gif" />
+                                 </image>
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <TextFlow prefHeight="235.0" prefWidth="885.0" />
+            <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="938.0" spacing="5.0" stylesheets="@../../styles.css">
                <children>
                   <Button id="btn" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#getOrdersWithReadyStatus" prefHeight="53.0" prefWidth="200.0" styleClass="btn-route" stylesheets="@../../styles.css" text="Ophalen verzendorders" />
-                  <Button mnemonicParsing="false" onAction="#createDispatchList" styleClass="btn-route" text="Maak verzendlijst" />
-               </children></HBox>
+                  <Button mnemonicParsing="false" onAction="#createDispatchList" styleClass="btn-route"
+                          text="Ophalen locaties">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></Button>
+                  <Button  mnemonicParsing="false" onAction="#getOptimalRoute" styleClass="btn-route"
+                           stylesheets="@../../styles.css" text="Bereken optimale route" />
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></HBox>
          </children>
       </VBox>
    </children>

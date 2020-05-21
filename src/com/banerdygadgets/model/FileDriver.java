@@ -67,7 +67,7 @@ public class FileDriver {
              System.out.print("-");
         System.out.println("");
     }
-    public void printInfo() {
+    public static void printInfo() {
         System.out.println("-----------------------------------------------------------------------------------");
         System.out.println("| Probability Function = exp(-(neighborDistance - currentDistance) / temperature) |");
         System.out.println("| newtemperature = oldtemperature *(1-RATE_OF_COOLING)                            |");

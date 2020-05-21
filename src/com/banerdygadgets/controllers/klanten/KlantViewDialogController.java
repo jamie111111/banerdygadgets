@@ -11,6 +11,7 @@ public class KlantViewDialogController {
     @FXML TextField klantnrField;
     @FXML TextField fullNameField;
     @FXML TextField adresField;
+    @FXML TextField huisnrField;
     @FXML TextField postcodeField;
     @FXML TextField woonPlaatsField;
     @FXML Label klantnrLabel;
@@ -24,7 +25,7 @@ public class KlantViewDialogController {
         if(KlantenViewController.selectedklant != null && KlantenViewController.selectedAddKlant
                 == false) {
             Klant klant = KlantenViewController.selectedklant;
-            setKlantenFields(klant.getKlantId(),klant.getFullName(),klant.getAdres(),
+            setKlantenFields(klant.getKlantId(),klant.getFullName(),klant.getAdres(),klant.getHuisnr(),
                     klant.getPostcode(),klant.getWoonplaats());
         setUpdateHeaderTitel();
         }else {
@@ -35,10 +36,12 @@ public class KlantViewDialogController {
     }
 
     private void setKlantenFields(int klantnr,String fullName,String adres,String postcode,
+                                  String huisnr,
                              String woonplaats) {
         klantnrField.setText(Integer.toString(klantnr));
         fullNameField.setText(fullName);
         adresField.setText(adres);
+        huisnrField.setText(huisnr);
         postcodeField.setText(postcode);
         woonPlaatsField.setText(woonplaats);
     }
@@ -46,20 +49,22 @@ public class KlantViewDialogController {
     public Klant getKlant() {
         String naam = fullNameField.getText();
         String adres = adresField.getText();
+        String huisnr = huisnrField.getText().trim();
         String postcode = postcodeField.getText().trim();
         String woonplaats = woonPlaatsField.getText();
 
-        Klant klant = new Klant(naam,adres,postcode,woonplaats);
+        Klant klant = new Klant(naam,adres,huisnr,postcode,woonplaats);
         return klant;
     }
     public Klant getUpdatedKlant() {
         int klantnr = Integer.parseInt(klantnrField.getText());
         String naam = fullNameField.getText();
-        String adres = adresField.getText();
+        String adres = adresField.getText().trim();
+        String huisnr = huisnrField.getText();
         String postcode = postcodeField.getText().trim();
         String woonplaats = woonPlaatsField.getText();
 
-        Klant klant = new Klant(klantnr,naam,adres,postcode,woonplaats);
+        Klant klant = new Klant(klantnr,naam,adres,huisnr,postcode,woonplaats);
         return klant;
     }
 

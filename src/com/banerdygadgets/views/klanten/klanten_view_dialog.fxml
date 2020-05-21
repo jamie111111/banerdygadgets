@@ -23,19 +23,23 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints />
             </rowConstraints>
             <Label fx:id="klantnrLabel" text="Klantnummer" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <Label alignment="CENTER" text="Volledige naam" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <Label text="Adres" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <Label alignment="CENTER" text="Postcode" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <Label alignment="CENTER" text="Woonplaats" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-            <TextField fx:id="fullNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="adresField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label alignment="CENTER" text="Woonplaats" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+            <TextField fx:id="fullNameField" promptText="Voer volledige naam in" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="adresField" promptText="Voer adres in" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <NumberTextField fx:id="klantnrField" GridPane.columnIndex="1" />
-         <TextField fx:id="postcodeField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-         <TextField fx:id="woonPlaatsField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+         <TextField fx:id="woonPlaatsField" promptText="Voer woonplaats in" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         <Label text="Huisnummer" GridPane.rowIndex="3" />
+         <TextField fx:id="huisnrField" promptText="Voer huisnr in" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         <HBox prefHeight="100.0" prefWidth="200.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Postcode" GridPane.rowIndex="4" />
+         <TextField fx:id="postcodeField" prefHeight="25.0" prefWidth="134.0" promptText="Voer postcode in" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
         </GridPane>
     </content>

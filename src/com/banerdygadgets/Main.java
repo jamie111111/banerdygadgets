@@ -13,15 +13,12 @@ public class Main extends Application {
         primaryStage.setTitle("Backoffice app");
         primaryStage.setScene(new Scene(root, 900, 600));
         primaryStage.show();
-
-
     }
 
 
     public static void main(String[] args) {
+//        TestGeo.geoCodeApi();
 
         launch(args);
-
-
     }
 }

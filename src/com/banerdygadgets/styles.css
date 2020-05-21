@@ -2,6 +2,10 @@
     -fx-background-color:transparent;
     -fx-cursor:hand;
 }
+.center_column {
+-fx-alignment: CENTER;
+}
+
 .btn {
          -fx-color:white;
          -fx-background-color:green;

@@ -109,13 +109,14 @@ public class Datahelpers {
         try {
             PreparedStatement statement = DatabaseHandler.getInstance().getConnection().prepareStatement(
                     "" +
-                    "UPDATE klant set fullName=?,adres=?,postcode=?,woonplaats=? WHERE " +
+                    "UPDATE klant set fullName=?,adres=?,postcode=?,huisnr=?,woonplaats=? WHERE " +
                     "klantId=?");
             statement.setString(1,klant.getFullName());
             statement.setString(2,klant.getAdres());
-            statement.setString(3,klant.getPostcode());
-            statement.setString(4,klant.getWoonplaats());
-            statement.setInt(5,klant.getKlantId());
+            statement.setString(3,klant.getHuisnr());
+            statement.setString(4,klant.getPostcode());
+            statement.setString(5,klant.getWoonplaats());
+            statement.setInt(6,klant.getKlantId());
             int result = statement.executeUpdate();
             if(result == 1 ) {
                 return  true;
@@ -129,11 +130,12 @@ public class Datahelpers {
     public static boolean addKlant(Klant klant) {
         try {
             PreparedStatement statement = DatabaseHandler.getInstance().getConnection().prepareStatement(
-               "INSERT INTO klant(fullName,adres,postcode,woonplaats) VALUES(?,?,?,?)");
+               "INSERT INTO klant(fullName,adres,postcode,woonplaats) VALUES(?,?,?,?,?)");
             statement.setString(1,klant.getFullName());
             statement.setString(2,klant.getAdres());
-            statement.setString(3,klant.getPostcode());
-            statement.setString(4,klant.getWoonplaats());
+            statement.setString(3,klant.getHuisnr());
+            statement.setString(4,klant.getPostcode());
+            statement.setString(5,klant.getWoonplaats());
             return statement.executeUpdate() > 0;
         }catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -171,12 +173,12 @@ public class Datahelpers {
                 int klantId = resultSet.getInt("klantId");
                 String naam = resultSet.getString("fullName");
                 String adres = resultSet.getString("adres");
+                String huisnr = resultSet.getString("huisnr");
                 String postcode = resultSet.getString("postcode");
                 String woonplaats = resultSet.getString("woonplaats");
-                Klant klant = new Klant(klantId,naam,adres,postcode,woonplaats);
+                Klant klant = new Klant(klantId,naam,adres,huisnr,postcode,woonplaats);
                 selectedKlantenInPostcodeRange.add(klant);
             }
-            System.out.println("returning from datahelpers line 179 :");
             return selectedKlantenInPostcodeRange;
         }catch (SQLException e) {
             System.out.println(e.getMessage());

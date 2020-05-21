@@ -21,7 +21,6 @@ public class RouteHelpers {
                 klantLijstId = klant.getKlantId();
                 if(klantLijstId == klantVerzendLijstId) {
                     verzendLijst.add(klant);
-                    System.out.println("verzendLijst: " + verzendLijst);
                 }
             }
         }
@@ -39,7 +38,6 @@ public class RouteHelpers {
                 klantLijstId = klant.getKlantId();
                 if(klantLijstId == klantVerzendLijstId) {
                     verzendLijst.add(klant);
-                    System.out.println("RetourLijst: " + verzendLijst);
                 }
             }
         }
