@@ -1,6 +1,6 @@
-7, Tom Cruise, Izaak Evertslaan 60, 6814 JK, Arnhem
-9, Matthew McConaughey, Lindenlaan 12, 3862 EM, Nijkerk
-10, Renze Klamer, Bouwmanlaan 27, 6731 AL, Otterlo
-3, Claire Danes, Het schip 148, 7325 NP, apeldoorn
-12, Marco de Groot, Oranjeweg 179, 6991 WN, Rheden
-17, Jesse James, Dorpstraat 34, 8015 PH, Zwolle
+Arnhem
+Nijkerk
+Otterlo
+apeldoorn
+Rheden
+Zwolle

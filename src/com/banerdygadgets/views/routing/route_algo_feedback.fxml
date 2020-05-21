@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="algoFeedbackPane" prefHeight="591.0" prefWidth="911.0" stylesheets="@../../styles.css"
+           xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.route.routeWindowFeedbackController">
+    <children>
+        <VBox prefHeight="200.0" prefWidth="100.0">
+            <children>
+                <fx:include fx:id="navigation" source="../navigation/Navigation.fxml" />
+                <HBox VBox.vgrow="ALWAYS">
+                    <children>
+                        <HBox fx:id="Hbox" HBox.hgrow="ALWAYS">
+                            <children>
+                                <TableView fx:id="algoFeedbackTable" prefHeight="236.0" prefWidth="676.0"
+                                           stylesheets="@../../styles.css" HBox.hgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn id="center" fx:id="routeField" prefWidth="437.0" styleClass="center" text="Route" />
+                                        <TableColumn fx:id="afstandField" minWidth="7.0" prefWidth="52.0" text="Afstand" />
+                                        <TableColumn fx:id="kansFunctieField" prefWidth="87.0" text="Kansfunctie" />
+                                        <TableColumn fx:id="randomGetalField" prefWidth="99.0" text="Random getal" />
+                                        <TableColumn fx:id="besluitField" prefWidth="235.0" text="Besluit" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </HBox>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="938.0" spacing="5.0" stylesheets="@../../styles.css">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#test" styleClass="btn-route"
+                                stylesheets="@../../styles.css" text="Test" />
+                    </children>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin></HBox>
+            </children>
+        </VBox>
+    </children>
+</StackPane>

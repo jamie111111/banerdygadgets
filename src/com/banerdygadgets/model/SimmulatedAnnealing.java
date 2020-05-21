@@ -1,9 +1,15 @@
 package com.banerdygadgets.model;
 
+import com.banerdygadgets.model.algofeedback.AlgoFeedBackList;
+
 public class SimmulatedAnnealing {
     public static final double RATE_OF_COOLING = 0.005;
     public static final double INITIAL_TEMPERATURE = 999;
     public static final double MIN_TEMPERATURE = 0.99;
+    public static String acceptanceProbabilityString;
+    public static String randomNumber;
+    public static String decisionString;
+
 
     public Route findRoute(double temperature, Route currentRoute) {
         Route shortestRoute = new Route(currentRoute);
@@ -11,14 +17,25 @@ public class SimmulatedAnnealing {
         while (temperature > MIN_TEMPERATURE) {
             System.out.print(currentRoute + " | " + currentRoute.getTotalStringDistance() + " | "
                     + String.format("%.2f", temperature));
+
             adjacentRoute = obtainAdjacentRoute(new Route(currentRoute));
             if (currentRoute.getTotalDistance() < shortestRoute.getTotalDistance())
                 shortestRoute = new Route(currentRoute);
+            AlgoFeedBackList.algoFeedbackList.add(new RouteAlgoFeedback(currentRoute.toString(),
+                    currentRoute.getTotalStringDistance(),String.format("%.2f", temperature),
+                    acceptanceProbabilityString,randomNumber,decisionString));
+
             if (acceptRoute(currentRoute.getTotalDistance(), adjacentRoute.getTotalDistance(), temperature))
                 currentRoute = new Route(adjacentRoute);
+            AlgoFeedBackList.algoFeedbackList.add(new RouteAlgoFeedback(currentRoute.toString(),
+                    currentRoute.getTotalStringDistance(),String.format("%.2f", temperature),
+                    acceptanceProbabilityString,randomNumber,decisionString));
+
             temperature *= 1 - RATE_OF_COOLING;
         }
+
         return shortestRoute;
+
     }
 
     private boolean acceptRoute(double currentDistance, double adjacentDistance, double temperature) {
@@ -28,17 +45,25 @@ public class SimmulatedAnnealing {
         double acceptanceProbability = 1.0;
         if (adjacentDistance >= currentDistance) {
             acceptanceProbability = Math.exp(-(adjacentDistance - currentDistance) / temperature);
+            acceptanceProbabilityString = String.format("%.2f", acceptanceProbability);
             shorterDistance = false;
         }
         double randomNumb = Math.random();
+        randomNumber = String.format("%.2f", randomNumb);
+
         if (acceptanceProbability >= randomNumb)
             acceptRouteFlag = true;
-        if (shorterDistance)
+        if (shorterDistance) {
             decision = "Doorgaan (Kortere aangrenzende route)";
-        else if (acceptRouteFlag)
+            decisionString = decision;
+        }
+        else if (acceptRouteFlag) {
             decision = "Doorgaan (Random nr <= Prob Function)";
+            decisionString = decision;
+        }
         else
             decision = "Blijf (Random nr > Prob Function)";
+        decisionString = decision;
         System.out.println("         | " + String.format("%.2f", acceptanceProbability) + "     " +
                 "  " +
                 "   " +

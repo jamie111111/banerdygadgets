@@ -1,14 +1,16 @@
 package com.banerdygadgets.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class GeoCode {
 
-    static ArrayList<Geolocation> populateInitialRoute() {
-        ArrayList<Geolocation> initialRoute = new ArrayList<Geolocation>();
+    static ObservableList<Geolocation> populateInitialRoute() {
+        ObservableList<Geolocation> initialRoute = FXCollections.observableArrayList();
         BufferedReader bufferedReader = null;
         try {
             bufferedReader = new BufferedReader(new FileReader("Geolocations.txt"));

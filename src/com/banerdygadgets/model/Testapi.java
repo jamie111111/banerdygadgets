@@ -5,17 +5,17 @@ import com.banerdygadgets.helpers.GeoCodingApiHelper;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class Testapi {
     private static ObservableList<Klant> verzendLijst;
-    public static ArrayList<Geolocation> geoLocaties = new ArrayList<>();
+public static ObservableList<Geolocation> geoLocaties = FXCollections.observableArrayList();
 
     public static void geoCodeApi() {
         verzendLijst = RouteWindowController.getVerzendLijst();

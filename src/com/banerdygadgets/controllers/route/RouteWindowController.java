@@ -4,6 +4,7 @@ import com.banerdygadgets.Main;
 import com.banerdygadgets.controllers.bestellingen.BestellingenController;
 import com.banerdygadgets.controllers.retouren.RetourenWindowController;
 import com.banerdygadgets.helpers.RouteHelpers;
+import com.banerdygadgets.helpers.Verzendlijst;
 import com.banerdygadgets.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -138,8 +139,11 @@ public class RouteWindowController  {
     @FXML
     public void createDispatchList() {
     Testapi.geoCodeApi();
+
     }
     public void getOptimalRoute() {
+        Verzendlijst writer = new Verzendlijst();
+        writer.writeList(Testapi.geoLocaties);
         System.out.println("presses testbutten");
         Route route = new Route(Testapi.geoLocaties);
         FileDriver.printHeading(route);

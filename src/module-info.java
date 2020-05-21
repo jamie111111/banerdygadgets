@@ -6,8 +6,9 @@ module BANerdyGadgets {
     requires gson;
     opens com.banerdygadgets;
 
-    opens com.banerdygadgets.model;
 
+    opens com.banerdygadgets.model;
+    opens com.banerdygadgets.model.algofeedback;
     opens com.banerdygadgets.controllers;
     opens com.banerdygadgets.controllers.navigation;
     opens com.banerdygadgets.controllers.retouren;

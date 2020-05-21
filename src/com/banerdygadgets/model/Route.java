@@ -1,13 +1,15 @@
 package com.banerdygadgets.model;
 
-import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.Arrays;
 import java.util.Collections;
 
 public class Route {
-    private ArrayList<Geolocation> cities = new ArrayList<Geolocation>();
+    private ObservableList<Geolocation> cities = FXCollections.observableArrayList();
 
-    public Route(ArrayList<Geolocation> cities) {
+    public Route(ObservableList<Geolocation> cities) {
         this.cities.addAll(cities);
         Collections.shuffle(this.cities);
     }
@@ -16,7 +18,7 @@ public class Route {
         this.cities.addAll(route.cities);
     }
 
-    public ArrayList<Geolocation> getCities() {
+    public ObservableList<Geolocation> getCities() {
         return cities;
     }
 
