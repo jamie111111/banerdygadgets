@@ -24,7 +24,7 @@ public class SimmulatedAnnealing {
             adjacentRoute = obtainAdjacentRoute(new Route(currentRoute));
             if (currentRoute.getTotalDistance() < shortestRoute.getTotalDistance())
                 shortestRoute = new Route(currentRoute);
-            routeWindowFeedbackController.getInstance().getFeedbackList().add(new RouteAlgoFeedback(currentRoute.toString(),
+            routeWindowFeedbackController.getInstance().getFeedbackList().add(new RouteAlgoFeedback(currentRoute.toStringPlacesAndPostals(),
                     currentRoute.getTotalStringDistance(),String.format("%.2f", temperature),
                     acceptanceProbabilityString,randomNumber,decisionString));
             routeWindowFeedbackController.getInstance().loadData();
@@ -39,7 +39,7 @@ public class SimmulatedAnnealing {
             temperature *= 1 - RATE_OF_COOLING;
         }
         routeWindowFeedbackController.getInstance().loadData();
-        System.out.println("De meest optimale route = " + shortestRoute.toString()+ ", afstand: " + shortestRoute.getTotalStringDistance()) ;
+//        System.out.println("De meest optimale route = " + shortestRoute.toString()+ ", afstand: " + shortestRoute.getTotalStringDistance()) ;
         this.korsteRoute = shortestRoute;
         return shortestRoute;
 

@@ -43,6 +43,9 @@ public class Geolocation {
         return EARTH_EQUATORIAL_RADIUS * 2D * Math.atan2(Math.sqrt(a), Math.sqrt(1D - a));
     }
     public String toString() {
+        return this.plaats;
+    }
+    public String toStringPlaatsEnPostcode() {
         return this.plaats + " " + this.postcode;
     }
 }

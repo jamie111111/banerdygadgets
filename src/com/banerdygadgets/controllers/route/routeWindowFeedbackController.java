@@ -49,7 +49,7 @@ public class routeWindowFeedbackController {
 
 
     @FXML private void test(){
-        loadData();
+        System.out.println(RouteWindowController.routelijst);
     }
 }
 

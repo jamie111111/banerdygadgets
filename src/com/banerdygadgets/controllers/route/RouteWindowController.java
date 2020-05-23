@@ -5,7 +5,10 @@ import com.banerdygadgets.controllers.bestellingen.BestellingenController;
 import com.banerdygadgets.controllers.retouren.RetourenWindowController;
 import com.banerdygadgets.helpers.RouteHelpers;
 import com.banerdygadgets.model.*;
-import com.itextpdf.text.*;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +32,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+
+
 
 
 /**
@@ -165,24 +170,31 @@ public class RouteWindowController  {
         FileDriver.printHeading(route);
         algo = new SimmulatedAnnealing();
         algo.findRoute(SimmulatedAnnealing.INITIAL_TEMPERATURE, route);
-        System.out.println("getOptimalrouteKnop " + algo.getKorsteRoute());
         exportAsPdf();
         FileDriver.printInfo();
     }
     public void exportAsPdf() throws IOException, DocumentException {
-        String printData = "De meeste optimale route op volgorde:  \n";
+        String printData = "De meeste optimale route op volgorde:  \n" + "RouteWindowController " +
+                "ln 171";
         StringBuilder builder = new StringBuilder(printData);
-        builder.append(algo.getKorsteRoute());
-        String list = builder.toString();
-        routelijst = list;
-        Document document = new Document();
+
+        ObservableList<Geolocation> route = algo.getKorsteRoute().getCities();
+        com.itextpdf.text.List list = new com.itextpdf.text.List(true,20);
+        com.itextpdf.text.ListItem item;
+        for(Geolocation locatie:route) {
+            item = new com.itextpdf.text.ListItem(locatie.toStringPlaatsEnPostcode());
+            list.add(item);
+        }
+        Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, new FileOutputStream("route_lijst.pdf"));
 
         document.open();
-        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
-        Chunk chunk = new Chunk(list, font);
-
-        document.add(chunk);
+//        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+//        Chunk chunk = new Chunk(list, font);
+        document.addTitle("");
+        document.add(new Paragraph("De meest optimale route voor de geselecteerde plaatsen: "));
+        document.add(new Paragraph("\n"));
+        document.add(list);
         document.close();
     }
 

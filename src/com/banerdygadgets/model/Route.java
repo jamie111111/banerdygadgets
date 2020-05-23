@@ -41,6 +41,9 @@ public class Route {
     }
 
     public String toString() {
-        return Arrays.toString(cities.toArray()).replace("[","").replace("]","").replace(",","\n");
+        return Arrays.toString(cities.toArray()).replace("[","").replace("]","");
+    }
+    public String toStringPlacesAndPostals() {
+        return Arrays.toString(cities.toArray()).replace("[","").replace("]","");
     }
 }
