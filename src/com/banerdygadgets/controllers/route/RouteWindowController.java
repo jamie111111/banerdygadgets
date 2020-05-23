@@ -5,6 +5,8 @@ import com.banerdygadgets.controllers.bestellingen.BestellingenController;
 import com.banerdygadgets.controllers.retouren.RetourenWindowController;
 import com.banerdygadgets.helpers.RouteHelpers;
 import com.banerdygadgets.model.*;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,16 +20,16 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+
 
 /**
  *
@@ -47,8 +49,9 @@ public class RouteWindowController  {
     @FXML private TableColumn<Klant,String> huisnrField;
     @FXML private TableColumn<Klant,String> postcodeField;
     @FXML private TableColumn<Klant,String> woonplaatsField;
-    @FXML private HBox Hbox;
-    @FXML private Pane pane;
+   SimmulatedAnnealing algo;
+   public static String routelijst;
+
 
 
 
@@ -144,7 +147,7 @@ public class RouteWindowController  {
     public void createDispatchList() throws IOException {
     Testapi.geoCodeApi();
     }
-    public void getOptimalRoute() throws IOException {
+    public void getOptimalRoute() throws IOException, DocumentException {
         try {
             Parent algoView = FXMLLoader.load(Main.class.getResource("views/routing" +
                     "/route_algo_feedback.fxml"));
@@ -160,9 +163,27 @@ public class RouteWindowController  {
 
         Route route = new Route(Testapi.geoLocaties);
         FileDriver.printHeading(route);
-        new SimmulatedAnnealing().findRoute(SimmulatedAnnealing.INITIAL_TEMPERATURE, route);
+        algo = new SimmulatedAnnealing();
+        algo.findRoute(SimmulatedAnnealing.INITIAL_TEMPERATURE, route);
+        System.out.println("getOptimalrouteKnop " + algo.getKorsteRoute());
+        exportAsPdf();
         FileDriver.printInfo();
+    }
+    public void exportAsPdf() throws IOException, DocumentException {
+        String printData = "De meeste optimale route op volgorde:  \n";
+        StringBuilder builder = new StringBuilder(printData);
+        builder.append(algo.getKorsteRoute());
+        String list = builder.toString();
+        routelijst = list;
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream("route_lijst.pdf"));
 
+        document.open();
+        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+        Chunk chunk = new Chunk(list, font);
+
+        document.add(chunk);
+        document.close();
     }
 
     public static ObservableList<Klant> getVerzendLijst() {

@@ -15,12 +15,12 @@
                             <children>
                                 <TableView fx:id="algoFeedbackTable" prefHeight="236.0" prefWidth="676.0" stylesheets="@../../styles.css" HBox.hgrow="ALWAYS">
                                     <columns>
-                                        <TableColumn fx:id="routeField" prefWidth="518.0" styleClass="center" text="Route" />
-                                        <TableColumn fx:id="afstandField" minWidth="7.0" prefWidth="51.0" text="Afstand" />
-                              <TableColumn fx:id="tempField" minWidth="7.0" prefWidth="50.0" text="Temp" />
-                                        <TableColumn fx:id="kansFunctieField" prefWidth="76.0" text="Kansfunctie" />
-                                        <TableColumn fx:id="randomGetalField" prefWidth="91.0" text="Random getal" />
-                                        <TableColumn fx:id="besluitField" prefWidth="295.0" text="Besluit" />
+                                        <TableColumn fx:id="routeField" prefWidth="539.0" styleClass="center" text="Route" />
+                                        <TableColumn fx:id="afstandField" minWidth="7.0" prefWidth="50.0" text="Afstand" />
+                              <TableColumn fx:id="tempField" minWidth="7.0" prefWidth="57.0" text="Temp" />
+                                        <TableColumn fx:id="kansFunctieField" prefWidth="75.0" text="Kansfunctie" />
+                                        <TableColumn fx:id="randomGetalField" prefWidth="92.0" text="Random getal" />
+                                        <TableColumn fx:id="besluitField" prefWidth="268.0" text="Besluit" />
                                     </columns>
                                 </TableView>
                             </children>

@@ -41,6 +41,6 @@ public class Route {
     }
 
     public String toString() {
-        return Arrays.toString(cities.toArray()).replace("[","").replace("]","");
+        return Arrays.toString(cities.toArray()).replace("[","").replace("]","").replace(",","\n");
     }
 }

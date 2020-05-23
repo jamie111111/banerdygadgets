@@ -4,8 +4,9 @@ module BANerdyGadgets {
     requires java.sql;
     requires javafx.fxml;
     requires gson;
+    requires org.apache.pdfbox;
+    requires itextpdf;
     opens com.banerdygadgets;
-
 
     opens com.banerdygadgets.model;
     opens com.banerdygadgets.model.algofeedback;

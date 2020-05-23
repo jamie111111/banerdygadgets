@@ -11,6 +11,7 @@ public class SimmulatedAnnealing {
     public static String acceptanceProbabilityString;
     public static String randomNumber;
     public static String decisionString;
+    private Route korsteRoute;
 
 
     public Route findRoute(double temperature, Route currentRoute) throws IOException {
@@ -38,6 +39,8 @@ public class SimmulatedAnnealing {
             temperature *= 1 - RATE_OF_COOLING;
         }
         routeWindowFeedbackController.getInstance().loadData();
+        System.out.println("De meest optimale route = " + shortestRoute.toString()+ ", afstand: " + shortestRoute.getTotalStringDistance()) ;
+        this.korsteRoute = shortestRoute;
         return shortestRoute;
 
     }
@@ -89,5 +92,8 @@ public class SimmulatedAnnealing {
         route.getCities().set(x2, city1);
         route.getCities().set(x1, city2);
         return route;
+    }
+    public Route getKorsteRoute() {
+       return  this.korsteRoute;
     }
 }
