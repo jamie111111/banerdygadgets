@@ -19,6 +19,7 @@ public static ObservableList<Geolocation> geoLocaties = FXCollections.observable
 
     public static void geoCodeApi() {
         verzendLijst = RouteWindowController.getVerzendLijst();
+
         for (int counter = 0; counter <= verzendLijst.size() - 1; counter++) {
                 Klant klant = verzendLijst.get(counter);
             String adres = klant.getAdres()+"+"+klant.getHuisnr()+"+"+klant.getPostcode()+
@@ -51,10 +52,12 @@ public static ObservableList<Geolocation> geoLocaties = FXCollections.observable
                         JsonObject geometryLocation = item.get("geometry").getAsJsonObject().get("location").getAsJsonObject();
                         float latitude = geometryLocation.get("lat").getAsFloat();
                         float longitude = geometryLocation.get("lng").getAsFloat();
-                        Geolocation location = new Geolocation(klant.getWoonplaats(), latitude,
+                        Geolocation location = new Geolocation(klant.getWoonplaats(),klant.getPostcode(),
+                                latitude,
                                 longitude);
                         geoLocaties.add(location);
-                        System.out.println("Address: " + klant.getWoonplaats() + ", Latitude: " + latitude + ", " +
+                        System.out.println("Address: " + klant.getWoonplaats() + " " + klant.getPostcode() + ", " +
+                                "Latitude: " + latitude + ", " +
                                 "Longitude: " + longitude);
 
 

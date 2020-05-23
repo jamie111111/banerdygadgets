@@ -179,6 +179,7 @@ public class Datahelpers {
                 Klant klant = new Klant(klantId,naam,adres,huisnr,postcode,woonplaats);
                 selectedKlantenInPostcodeRange.add(klant);
             }
+            System.out.println(selectedKlantenInPostcodeRange);
             return selectedKlantenInPostcodeRange;
         }catch (SQLException e) {
             System.out.println(e.getMessage());

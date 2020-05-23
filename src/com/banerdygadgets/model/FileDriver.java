@@ -28,11 +28,11 @@ public class FileDriver {
         return initialRoute;
     }
     public static void main(String[] args) {
-        FileDriver driver = new FileDriver();
-        Route route = new Route(populateInitialRoute());
-        printHeading(route);
-        new SimmulatedAnnealing().findRoute(SimmulatedAnnealing.INITIAL_TEMPERATURE, route);
-        driver.printInfo();
+//        FileDriver driver = new FileDriver();
+//        Route route = new Route(populateInitialRoute());
+//        printHeading(route);
+//        new SimmulatedAnnealing().findRoute(SimmulatedAnnealing.INITIAL_TEMPERATURE, route);
+//        driver.printInfo();
     }
     public static void printHeading(Route route) {
         String headingColumn1 = "Route";

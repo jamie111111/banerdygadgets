@@ -5,14 +5,29 @@ public class Geolocation {
     private static final double CONVERT_DEGREES_TO_RADIANS = Math.PI/180D;
     private double longitude;
     private double latitude;
-    private String name;
+    private String plaats;
+    private String postcode;
     public Geolocation(String name, double latitude, double longitude){
-        this.name = name;
+        this.plaats = name;
         this.longitude = longitude * CONVERT_DEGREES_TO_RADIANS;
         this.latitude = latitude * CONVERT_DEGREES_TO_RADIANS;
     }
+
+    public Geolocation(String plaats, String postcode,double latitude,
+                       double longitude
+                      ) {
+        this.longitude = longitude * CONVERT_DEGREES_TO_RADIANS;
+        this.latitude = latitude * CONVERT_DEGREES_TO_RADIANS;
+        this.plaats    = plaats;
+        this.postcode  = postcode;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
     public String getName() {
-        return name;
+        return plaats;
     }
     public double getLatitude(){
         return this.latitude;
@@ -28,6 +43,6 @@ public class Geolocation {
         return EARTH_EQUATORIAL_RADIUS * 2D * Math.atan2(Math.sqrt(a), Math.sqrt(1D - a));
     }
     public String toString() {
-        return this.name;
+        return this.plaats + " " + this.postcode;
     }
 }

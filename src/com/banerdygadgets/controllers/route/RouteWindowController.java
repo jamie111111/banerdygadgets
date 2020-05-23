@@ -4,12 +4,13 @@ import com.banerdygadgets.Main;
 import com.banerdygadgets.controllers.bestellingen.BestellingenController;
 import com.banerdygadgets.controllers.retouren.RetourenWindowController;
 import com.banerdygadgets.helpers.RouteHelpers;
-import com.banerdygadgets.helpers.Verzendlijst;
 import com.banerdygadgets.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
@@ -20,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -33,6 +35,7 @@ import java.util.Optional;
 public class RouteWindowController  {
     private static ObservableList<Klant> verzendLijst = FXCollections.observableArrayList();
     private static PostcodeRange postcodeRange;
+    public static routeWindowFeedbackController ctrl;
     @FXML
     private ImageView imagePostcodes;
 
@@ -104,6 +107,7 @@ public class RouteWindowController  {
 
         if(result.isPresent() && result.get() == ButtonType.OK) {
             RouteWindowDialogController controller = fxmlLoader.getController();
+
             verzendLijst.clear();
             // Bepaal postcodegebied voor de verzendlijst
             postcodeRange = controller.getPostcodeRange();
@@ -137,18 +141,28 @@ public class RouteWindowController  {
         }
     }
     @FXML
-    public void createDispatchList() {
+    public void createDispatchList() throws IOException {
     Testapi.geoCodeApi();
-
     }
-    public void getOptimalRoute() {
-        Verzendlijst writer = new Verzendlijst();
-        writer.writeList(Testapi.geoLocaties);
-        System.out.println("presses testbutten");
+    public void getOptimalRoute() throws IOException {
+        try {
+            Parent algoView = FXMLLoader.load(Main.class.getResource("views/routing" +
+                    "/route_algo_feedback.fxml"));
+
+            Scene algoScene = new Scene(algoView,1100, 600);
+            Stage stage = new Stage();
+            stage.setScene(algoScene);
+            stage.setTitle("Algoritme calculaties");
+            stage.show();
+        }catch (Exception e) {
+            System.out.println("Can't load window " + e.getMessage());
+        }
+
         Route route = new Route(Testapi.geoLocaties);
         FileDriver.printHeading(route);
         new SimmulatedAnnealing().findRoute(SimmulatedAnnealing.INITIAL_TEMPERATURE, route);
         FileDriver.printInfo();
+
     }
 
     public static ObservableList<Klant> getVerzendLijst() {

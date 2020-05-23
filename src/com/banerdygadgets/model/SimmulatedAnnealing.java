@@ -1,17 +1,19 @@
 package com.banerdygadgets.model;
 
-import com.banerdygadgets.model.algofeedback.AlgoFeedBackList;
+import com.banerdygadgets.controllers.route.routeWindowFeedbackController;
+
+import java.io.IOException;
 
 public class SimmulatedAnnealing {
     public static final double RATE_OF_COOLING = 0.005;
-    public static final double INITIAL_TEMPERATURE = 999;
+    public static final double INITIAL_TEMPERATURE = 999999;
     public static final double MIN_TEMPERATURE = 0.99;
     public static String acceptanceProbabilityString;
     public static String randomNumber;
     public static String decisionString;
 
 
-    public Route findRoute(double temperature, Route currentRoute) {
+    public Route findRoute(double temperature, Route currentRoute) throws IOException {
         Route shortestRoute = new Route(currentRoute);
         Route adjacentRoute;
         while (temperature > MIN_TEMPERATURE) {
@@ -21,19 +23,21 @@ public class SimmulatedAnnealing {
             adjacentRoute = obtainAdjacentRoute(new Route(currentRoute));
             if (currentRoute.getTotalDistance() < shortestRoute.getTotalDistance())
                 shortestRoute = new Route(currentRoute);
-            AlgoFeedBackList.algoFeedbackList.add(new RouteAlgoFeedback(currentRoute.toString(),
+            routeWindowFeedbackController.getInstance().getFeedbackList().add(new RouteAlgoFeedback(currentRoute.toString(),
                     currentRoute.getTotalStringDistance(),String.format("%.2f", temperature),
                     acceptanceProbabilityString,randomNumber,decisionString));
+            routeWindowFeedbackController.getInstance().loadData();
+
 
             if (acceptRoute(currentRoute.getTotalDistance(), adjacentRoute.getTotalDistance(), temperature))
                 currentRoute = new Route(adjacentRoute);
-            AlgoFeedBackList.algoFeedbackList.add(new RouteAlgoFeedback(currentRoute.toString(),
+            routeWindowFeedbackController.getInstance().getFeedbackList().add(new RouteAlgoFeedback(currentRoute.toString(),
                     currentRoute.getTotalStringDistance(),String.format("%.2f", temperature),
                     acceptanceProbabilityString,randomNumber,decisionString));
-
+            routeWindowFeedbackController.getInstance().loadData();
             temperature *= 1 - RATE_OF_COOLING;
         }
-
+        routeWindowFeedbackController.getInstance().loadData();
         return shortestRoute;
 
     }
