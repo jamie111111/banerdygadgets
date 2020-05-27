@@ -6,6 +6,11 @@ module BANerdyGadgets {
     requires gson;
     requires org.apache.pdfbox;
     requires itextpdf;
+    requires javafx.web;
+
+
+
+
     opens com.banerdygadgets;
 
     opens com.banerdygadgets.model;

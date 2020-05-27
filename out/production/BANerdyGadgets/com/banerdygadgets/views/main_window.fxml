@@ -24,10 +24,5 @@
         </rowConstraints>
       </GridPane>
    </center>
-   <left>
-      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: lightgreen;" BorderPane.alignment="CENTER" />
-   </left>
-   <bottom>
-      <HBox prefHeight="57.0" prefWidth="600.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER" />
-   </bottom>
+
 </BorderPane>

@@ -43,11 +43,10 @@ public class RetourenWindowController implements Initializable {
     private TableColumn<RetourOrder, LocalDate> colDatum;
     @FXML
     private TableColumn<RetourOrder, String> colReden;
-    @FXML
-    private TableColumn<RetourOrder, String> colStatus;
+    @FXML private TableColumn<RetourOrder, String> colStatus;
     @FXML private TableColumn<RetourOrder, Integer> colKlantNr;
-    @FXML
-    private ContextMenu tableViewContextMenu;
+    @FXML private ContextMenu tableViewContextMenu;
+
 
     public static RetourOrder selectedRetourOrder = null;
 

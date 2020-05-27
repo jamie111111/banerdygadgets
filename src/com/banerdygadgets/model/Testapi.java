@@ -59,8 +59,6 @@ public static ObservableList<Geolocation> geoLocaties = FXCollections.observable
                         System.out.println("Address: " + klant.getWoonplaats() + " " + klant.getPostcode() + ", " +
                                 "Latitude: " + latitude + ", " +
                                 "Longitude: " + longitude);
-
-
                     }
                 }
             } catch(Exception e) {

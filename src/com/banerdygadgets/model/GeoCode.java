@@ -30,8 +30,6 @@ public class GeoCode {
     }
 
     public static void main(String[] args) {
-
-
         FileDriver driver = new FileDriver();
         Route route = new Route(populateInitialRoute());
         printHeading(route);
@@ -42,7 +40,6 @@ public class GeoCode {
                 "getal | Besluit       " +
                 "   " +
                 "                ";
-
         //Bereken de lengte van alle plaatsnamen
         int cityNamesLength = 0;
         for (int x = 0; x < route.getCities().size(); x++)

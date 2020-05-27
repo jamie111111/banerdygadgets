@@ -11,14 +11,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("views/main_window.fxml"));
         primaryStage.setTitle("Backoffice app");
-        primaryStage.setScene(new Scene(root, 900, 600));
+        primaryStage.setScene(new Scene(root, 1300, 670));
         primaryStage.show();
     }
 
 
     public static void main(String[] args) {
 //        TestGeo.geoCodeApi();
-
         launch(args);
     }
 }

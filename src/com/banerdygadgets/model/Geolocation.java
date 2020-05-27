@@ -45,7 +45,10 @@ public class Geolocation {
     public String toString() {
         return this.plaats;
     }
+    public String returnPostcode() {
+        return postcode;
+    }
     public String toStringPlaatsEnPostcode() {
-        return this.plaats + " " + this.postcode;
+        return this.plaats + this.postcode;
     }
 }

@@ -15,5 +15,4 @@ public class DatabaseStringQueries {
     public static final String DELETE_RETOURORDER = "DELETE FROM " + RETOUR_TABLE + " WHERE " + ID_COLUMN + " = ?";
     public static final String UPDATE_STATUS_RETOURORDER =
             "UPDATE " + RETOUR_TABLE + " SET " + STATUS_COLUMN + " =? WHERE " + ID_COLUMN + " = ?";
-
 }

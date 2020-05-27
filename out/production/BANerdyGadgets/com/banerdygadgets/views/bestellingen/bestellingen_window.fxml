@@ -4,17 +4,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane fx:id="bestellingStackpane" prefHeight="619.0" prefWidth="861.0"
-           xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.bestellingen.BestellingenController">
+<StackPane fx:id="bestellingStackpane" prefHeight="619.0" prefWidth="861.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.bestellingen.BestellingenController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
           <fx:include source="../navigation/Navigation.fxml" />
-            <TableView fx:id="tableViewBestelling" maxHeight="1.7976931348623157E308" prefHeight="522.0"
-                       prefWidth="861.0">
+            <TableView fx:id="tableViewBestelling" maxHeight="1.7976931348623157E308" prefHeight="522.0" prefWidth="861.0">
               <columns>
-                <TableColumn  fx:id="colBestelNr" prefWidth="75.0" text="Bestelnr" />
+                <TableColumn fx:id="colBestelNr" prefWidth="75.0" text="Bestelnr" />
                   <TableColumn fx:id="colKlantNr" prefWidth="75.0" text="Klantnr" />
                 <TableColumn fx:id="colDatum" prefWidth="75.0" text="Datum" />
                   <TableColumn fx:id="colStatus" prefWidth="75.0" text="Status" />
@@ -23,7 +20,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" stylesheets="@../../styles.css">
+            <HBox alignment="CENTER" prefHeight="41.0" prefWidth="861.0" stylesheets="@../../styles.css">
                <children>
                   <Button mnemonicParsing="false" onAction="#onUpdateBestelling" styleClass="btn" stylesheets="@../../styles.css" text="Update" />
                   <Button mnemonicParsing="false" onAction="#onDeleteBestelling" styleClass="btn" stylesheets="@../../styles.css" text="Verwijder">

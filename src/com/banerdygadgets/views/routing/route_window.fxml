@@ -2,20 +2,19 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
 
-<StackPane fx:id="routeWindowPane" prefHeight="591.0" prefWidth="911.0" stylesheets="@../../styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.route.RouteWindowController">
+<StackPane fx:id="routeWindowPane" prefHeight="750.0" prefWidth="1300.0" style="-fx-background-color: white;" stylesheets="@../../styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.route.RouteWindowController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <VBox prefHeight="591.0" prefWidth="1041.0">
          <children>
               <fx:include fx:id="navigation" source="../navigation/Navigation.fxml" />
             <HBox VBox.vgrow="ALWAYS">
                <children>
-                  <HBox fx:id="Hbox" HBox.hgrow="ALWAYS">
+                  <HBox fx:id="Hbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                      <children>
-                        <TableView fx:id="verzendlijstTableView" prefHeight="236.0" prefWidth="676.0" stylesheets="@../../styles.css">
+                        <TableView fx:id="verzendlijstTableView" prefHeight="236.0" prefWidth="550.0" stylesheets="@../../styles.css">
                           <columns>
                             <TableColumn id="center" fx:id="klantNrField" prefWidth="75.0" styleClass="center" text="Klantnr" />
                             <TableColumn fx:id="naamField" prefWidth="75.0" text="Naam" />
@@ -28,39 +27,30 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <StackPane>
-                           <children>
-                              <ImageView fx:id="imagePostcodes" fitHeight="241.0" fitWidth="210.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../../../../resources/Postcodes_in_Nederland.gif" />
-                                 </image>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                           </children>
-                        </StackPane>
+                        <ScrollPane style="-fx-background-color: grey;" HBox.hgrow="ALWAYS">
+                           <content>
+                              <WebView fx:id="webViewRoute" />
+                           </content>
+                        </ScrollPane>
                      </children>
                   </HBox>
                </children>
             </HBox>
-            <TextFlow prefHeight="235.0" prefWidth="885.0" />
-            <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="938.0" spacing="5.0" stylesheets="@../../styles.css">
+            <HBox alignment="CENTER" prefHeight="31.0" prefWidth="938.0" spacing="50.0" style="-fx-background-color: white;" stylesheets="@../../styles.css">
                <children>
                   <Button id="btn" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#getOrdersWithReadyStatus" prefHeight="53.0" prefWidth="200.0" styleClass="btn-route" stylesheets="@../../styles.css" text="Ophalen verzendorders" />
-                  <Button mnemonicParsing="false" onAction="#createDispatchList" styleClass="btn-route"
-                          text="Ophalen locaties">
+                  <Button mnemonicParsing="false" onAction="#createDispatchList" styleClass="btn-route" text="Ophalen locaties">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin></Button>
-                  <Button  mnemonicParsing="false" onAction="#getOptimalRoute" styleClass="btn-route"
-                           stylesheets="@../../styles.css" text="Bereken optimale route" />
+                  <Button mnemonicParsing="false" onAction="#getOptimalRoute" styleClass="btn-route" stylesheets="@../../styles.css" text="Bereken optimale route" />
+                  <Button fx:id="testBtn" layoutX="420.0" layoutY="11.0" mnemonicParsing="false" onAction="#testbutton" styleClass="btn-route" stylesheets="@../../styles.css" text="Test" />
                </children>
                <VBox.margin>
-                  <Insets />
+                  <Insets bottom="5.0" top="5.0" />
                </VBox.margin></HBox>
          </children>
       </VBox>
