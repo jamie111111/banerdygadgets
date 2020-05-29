@@ -19,7 +19,8 @@ public class Testapi {
     public static ObservableList<Geolocation> geoLocaties = FXCollections.observableArrayList();
 
     public static void geoCodeApi() {
-        verzendLijst = RouteWindowController.getVerzendLijst();
+        verzendLijst = RouteWindowController.
+                getVerzendLijst();
 
         for (int counter = 0; counter <= verzendLijst.size() - 1; counter++) {
                 Klant klant = verzendLijst.get(counter);
