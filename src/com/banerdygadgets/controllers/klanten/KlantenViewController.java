@@ -21,30 +21,29 @@ import java.util.Optional;
 
 public class KlantenViewController {
     private static ObservableList<Klant> klantLijst = FXCollections.observableArrayList();
-
-    @FXML
-    StackPane klantStackPane;
-
-    @FXML
-    TableView<Klant> tableViewKlant;
-    @FXML
-    TableColumn<Klant, Integer> colKlantNr;
-    @FXML
-    TableColumn<Klant, String> colVolledigeNaam;
-    @FXML
-    TableColumn<Klant, String> colAdres;
-    @FXML
-    TableColumn<Klant, String> colHuisNr;
-    @FXML
-    TableColumn<Klant, String> colPostcode;
-    @FXML
-    TableColumn<Klant, String> colWoonplaats;
+    private static KlantenViewController instance;
+    @FXML StackPane klantStackPane;
+    @FXML TableView<Klant> tableViewKlant;
+    @FXML TableColumn<Klant, Integer> colKlantNr;
+    @FXML TableColumn<Klant, String> colVolledigeNaam;
+    @FXML TableColumn<Klant, String> colAdres;
+    @FXML TableColumn<Klant, String> colHuisNr;
+    @FXML TableColumn<Klant, String> colPostcode;
+    @FXML TableColumn<Klant, String> colWoonplaats;
 
     public static Klant selectedklant = null;
     public static boolean selectedAddKlant = false;
+    public KlantenViewController() {
+        instance=this;
+    }
+    public static KlantenViewController getInstance() {
+        if(instance == null) {
+            instance = new KlantenViewController();
+        }
+        return instance;
+    }
 
-    @FXML private void initialize() {
-
+    @FXML public void initialize() {
         initCol();
         loadData();
     }
@@ -56,27 +55,6 @@ public class KlantenViewController {
         colHuisNr.setCellValueFactory(new PropertyValueFactory<>("huisnr"));
         colPostcode.setCellValueFactory(new PropertyValueFactory<>("postcode"));
         colWoonplaats.setCellValueFactory(new PropertyValueFactory<>("woonplaats"));
-    }
-    public static void loadDataOnStartUp() {
-        klantLijst.clear();
-        DatabaseHandler handler = DatabaseHandler.getInstance();
-        String query = "SELECT * FROM klant";
-        ResultSet results = handler.executeQuery(query);
-        try{
-            while (results.next()) {
-                int klantId = results.getInt("klantId");
-                String naam = results.getString("fullName");
-                String adres = results.getString("adres");
-                String huisnr = results.getString("huisnr");
-                String postcode = results.getString("postcode");
-                String woonplaats = results.getString("woonplaats");
-                Klant klant = new Klant(klantId,naam,adres,huisnr,postcode,woonplaats);
-                klantLijst.add(klant);
-
-            }
-        }catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
     }
     private void loadData() {
         klantLijst.clear();

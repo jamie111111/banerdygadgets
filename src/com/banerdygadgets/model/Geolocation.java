@@ -8,12 +8,6 @@ public class Geolocation {
     private String plaats;
     private String postcode;
 
-    public Geolocation(String name, double latitude, double longitude){
-        this.plaats = name;
-        this.longitude = longitude * CONVERT_DEGREES_TO_RADIANS;
-        this.latitude = latitude * CONVERT_DEGREES_TO_RADIANS;
-    }
-
     public Geolocation(String plaats, String postcode,double latitude,
                        double longitude
                       ) {
@@ -36,6 +30,7 @@ public class Geolocation {
     public double getLongitude(){
         return this.longitude;
     }
+    //Methode om de afstand te berekenen met de distance formule
     public double measureDistance(Geolocation city) {
         double deltaLongitude = (city.getLongitude() - this.getLongitude());
         double deltaLatitude = (city.getLatitude() - this.getLatitude());
@@ -51,8 +46,5 @@ public class Geolocation {
     }
     public String toStringPlaatsEnPostcode() {
         return this.plaats + this.postcode;
-    }
-    public String toStringGeocodes() {
-        return "Breedtegraad: " + this.latitude + ", Lengtegraad: " + this.longitude;
     }
 }

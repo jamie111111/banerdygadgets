@@ -12,8 +12,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
@@ -22,7 +20,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -30,14 +27,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-/**
- *
- */
 public class RouteWindowController  {
     private static ObservableList<Klant> verzendLijst = FXCollections.observableArrayList();
     private static PostcodeRange postcodeRange;
-//    @FXML
-//    private ImageView imagePostcodes;
+    private WebEngine engine;
+    private SimmulatedAnnealing algo;
 
     @FXML private StackPane routeWindowPane;
     @FXML private TableView<Klant> verzendlijstTableView;
@@ -48,10 +42,6 @@ public class RouteWindowController  {
     @FXML private TableColumn<Klant,String> postcodeField;
     @FXML private TableColumn<Klant,String> woonplaatsField;
     @FXML private WebView webViewRoute;
-    private WebEngine engine;
-   SimmulatedAnnealing algo;
-   public static String routelijst;
-    StringBuilder html;
 
     @FXML private void initialize() throws FileNotFoundException {
         loadData();
@@ -80,8 +70,9 @@ public class RouteWindowController  {
         engine.loadContent(url);
 
     }
-
+    //Tonen van een dialoogvenster om postcodegebied te bepalen voor de route
     @FXML private void getOrdersWithReadyStatus() {
+        verzendLijst.clear();
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(routeWindowPane.getScene().getWindow());
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -100,8 +91,6 @@ public class RouteWindowController  {
 
         if(result.isPresent() && result.get() == ButtonType.OK) {
             RouteWindowDialogController controller = fxmlLoader.getController();
-
-            verzendLijst.clear();
             // Bepaal postcodegebied voor de verzendlijst
             postcodeRange = controller.getPostcodeRange();
             //Haal klanten op in het vastgestelde postcodegebied
@@ -110,18 +99,20 @@ public class RouteWindowController  {
                             ,postcodeRange.getPostcodeTot());
             //Haal bestellingen op met verzendklaar status
             List<Bestelling> verzendKlaarlijstBestellingen =
-                    BestellingenController.getReadyBestellingen();
+                    BestellingenController.getInstance().getReadyBestellingen();
             //Haal klanten op uit de bestellingen met verzendklaar status
             RouteHelpers routeHelpers = new RouteHelpers();
-            ObservableList<Klant> fetchedList = FXCollections.observableArrayList();
+            ObservableList<Klant> fetchedList;
              fetchedList = routeHelpers.getKlantBestellingWithVerzendKlaarStatus(klantLijst,
                     verzendKlaarlijstBestellingen);
+             //loop door gefilterde lijst en voeg toe aan verzendlijkst
              for(Klant klant:fetchedList) {
                  verzendLijst.add(klant);
              }
             //Haal retourorders op met status aangemeld
             List<RetourOrder> retourOrdersAangemeld =
-                    RetourenWindowController.getReadyForDispatchRetourOrders();
+//                    RetourenWindowController.getReadyForDispatchRetourOrders();
+              RetourenWindowController.getInstance().getReadyForDispatchRetourOrders();
              fetchedList = routeHelpers.getRetourOrderWithAangemeldStatus(klantLijst,
                      retourOrdersAangemeld);
             for(Klant klant:fetchedList) {
@@ -136,36 +127,26 @@ public class RouteWindowController  {
         }
     }
     @FXML
-    public void getGeoLocations() throws IOException {
-    Testapi.geoCodeApi();
+    private void getGeoLocations() throws IOException {
+    GoogleApi.geoCodeApi();
     }
     //Een method om de gebruiker feedback te geven van de routeberekening
     public void getOptimalRoute() throws IOException, DocumentException {
-        try {
-            Parent algoView = FXMLLoader.load(Main.class.getResource("views/routing" +
-                    "/route_algo_feedback.fxml"));
-            Scene algoScene = new Scene(algoView,1100, 600);
-            Stage stage = new Stage();
-            stage.setScene(algoScene);
-            stage.setTitle("Algoritme calculaties");
-            stage.show();
-        }catch (Exception e) {
-            System.out.println("Can't load window " + e.getMessage());
-        }
-        Route route = new Route(Testapi.geoLocaties);
-        FileDriver.printHeading(route);
+        Route route = new Route(GoogleApi.geoLocaties);
+        //Print de header voor de uitkomsten van de berekening in console
+        Printer.printHeading(route);
+        //instantieer algo en vind de meest optimale route
         algo = new SimmulatedAnnealing();
         algo.findRoute(SimmulatedAnnealing.INITIAL_TEMPERATURE, route);
-        exportAsPdf();
-        FileDriver.printInfo();
+        //Exporteer naar pdf
+        //print informatie over berekening in console
+        Printer.printInfo();
 
     }
+    //Methode om route uit te printen naar pdf, wordt nu opgeslagen in working directory
     public void exportAsPdf() throws IOException, DocumentException {
-        String printData = "De meeste optimale route op volgorde:  \n" + "RouteWindowController " +
-                "ln 171";
-        StringBuilder builder = new StringBuilder(printData);
         StringBuilder url = new StringBuilder("https://www.google.nl/maps/dir");
-
+        //Maak lijst voor de pdf
         com.itextpdf.text.List list = new com.itextpdf.text.List(true,20);
         com.itextpdf.text.ListItem item;
         ObservableList<Geolocation> route = algo.getKorsteRoute().getCities();
@@ -175,52 +156,42 @@ public class RouteWindowController  {
             url.append("/" + locatie.returnPostcode());
         }
         url.append("/"+ route.get(0).returnPostcode());
-
-        System.out.println("line 189" + url);
-//        FileChooser fileChooser = new FileChooser();
-//        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("pdf",
-//                        "*.pdf"));
+        System.out.println("line 189 " + url);
         Document document = new Document(PageSize.A4);
-        PdfWriter pdf= PdfWriter.getInstance(document,
+        PdfWriter.getInstance(document,
                 new FileOutputStream("route.pdf"));
         document.open();
-        document.addTitle("");
         document.add(new Paragraph("De meest optimale route voor de geselecteerde plaatsen: "));
-        Rectangle rect = new Rectangle(0,0);
+        document.add(Chunk.NEWLINE);
+        document.add(list);
+        document.add(Chunk.NEWLINE);
+        //Url naar google maps
+        Chunk chunk = new Chunk("Link naar googlemaps route beschrijving");
+        chunk.setAnchor(url.toString());
+//        document.add(new Paragraph(url.toString()));
+        document.add(chunk);
         document.close();
+        AlertFactory.showSimpleAlert("Route opgeslagen","De route is opgeslagen als pdf met een " +
+                "link naar googlemaps voor de koerier");
     }
 
     public static ObservableList<Klant> getVerzendLijst() {
         return verzendLijst;
     }
-    public void testbutton() {
+
+    public void showRoute() { // Methode om route in google maps zien in de app
         ObservableList<Geolocation> route = algo.getKorsteRoute().getCities();
         System.out.println(route.toString());
-        String src = "https://www.google.nl/maps/embed/v1/directions?key" +
-                "=AIzaSyBcxeIz1lk8mFWHnhm466ZaUF1vQGWwFeQ";
-        html = new StringBuilder();
-        html.append("<!DOCTYPE html>");
-        html.append("<html lang=\"en\">");
-        html.append("<html>");
-        html.append("<meta charset=\"UTF-8\">");
-        html.append("<title>Routepagina</title>");
-        html.append("</head>");
-        html.append("<body>");
-        html.append("<iframe width=\"800\" height=\"600\" frameborder=\"0\" style=\"border: 0;\" " +
-                "src=\"" + src);
-        html.append("&origin="+route.get(0).returnPostcode());
-        html.append("&destination=" + route.get(0).returnPostcode());
-        html.append("&waypoints=");
-
+        StringBuilder htmlString = RouteHelpers.getInstance().htmlStringBuilder(route);
         for(int i = 1;i<route.size();i++ ) {
-            if (i > 1) {html.append("|");
+            if (i > 1) {htmlString.append("|");
             }
-            html.append(route.get(i).returnPostcode());
+            htmlString.append(route.get(i).returnPostcode());
         }
-        html.append("\" allowfullscreen></iframe>");
-        html.append("</body>");
-        html.append("</html>");
-        loadRouteWebpage(html.toString());
+        htmlString.append("\" allowfullscreen></iframe>");
+        htmlString.append("</body>");
+        htmlString.append("</html>");
+        loadRouteWebpage(htmlString.toString());
     }
 
 

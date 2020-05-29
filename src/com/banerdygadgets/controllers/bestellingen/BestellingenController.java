@@ -21,26 +21,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public final class BestellingenController {
+public class BestellingenController {
     private static ObservableList<Bestelling> bestelLijst = FXCollections.observableArrayList();
 
-    @FXML
-    StackPane bestellingStackpane;
+    @FXML StackPane bestellingStackpane;
 
-    @FXML
-    TableView<Bestelling> tableViewBestelling;
-    @FXML
-    TableColumn<Bestelling, Integer> colBestelNr;
-    @FXML
-    TableColumn<Bestelling, Integer> colKlantNr;
-    @FXML
-    TableColumn<Bestelling, String> colDatum;
-    @FXML
-    TableColumn<Bestelling, String> colStatus;
+    @FXML TableView<Bestelling> tableViewBestelling;
+    @FXML TableColumn<Bestelling, Integer> colBestelNr;
+    @FXML TableColumn<Bestelling, Integer> colKlantNr;
+    @FXML TableColumn<Bestelling, String> colDatum;
+    @FXML TableColumn<Bestelling, String> colStatus;
+    private static BestellingenController instance;
 
     public static Bestelling selectedBestelling = null;
 
-    public static List<Bestelling> getReadyBestellingen() {
+    public BestellingenController() {
+        instance = this;
+    }
+    public static BestellingenController getInstance() {
+        if(instance == null) {
+            instance = new BestellingenController();
+        }
+        return instance;
+    }
+
+    //Haal bestelling op met een verzendklaar status
+    public List<Bestelling> getReadyBestellingen() {
         List<Bestelling> verzendklaarLijst = new ArrayList<>();
         for (Bestelling bestelling:bestelLijst) {
             if(bestelling.getStatus().equals("Verzendklaar")) {
@@ -50,7 +56,7 @@ public final class BestellingenController {
         return verzendklaarLijst;
     }
 
-    @FXML private void initialize() {
+    @FXML public void initialize() {
         initCol();
         loadData();
     }

@@ -1,5 +1,8 @@
 package com.banerdygadgets;
 
+import com.banerdygadgets.controllers.bestellingen.BestellingenController;
+import com.banerdygadgets.controllers.klanten.KlantenViewController;
+import com.banerdygadgets.controllers.retouren.RetourenWindowController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,11 +16,9 @@ public class Main extends Application {
         primaryStage.setTitle("Backoffice app");
         primaryStage.setScene(new Scene(root, 1300, 670));
         primaryStage.show();
+
     }
-
-
     public static void main(String[] args) {
-//        TestGeo.geoCodeApi();
         launch(args);
     }
 }

@@ -1,12 +1,13 @@
 package com.banerdygadgets.model;
 
-public class GeoCode {
+public class Printer {
     public static void printHeading(Route route) {
         String headingColumn1 = "Route";
         String remainingHeadingColumns = "Afstand |  Temperatuur  | Probility function | Random " +
                 "getal | Besluit       " +
                 "   " +
                 "                ";
+
         //Bereken de lengte van alle plaatsnamen
         int cityNamesLength = 0;
         for (int x = 0; x < route.getCities().size(); x++)
@@ -34,5 +35,13 @@ public class GeoCode {
         for (int x=0; x < cityNamesLength+route.getCities().size()*2; x++)
              System.out.print("-");
         System.out.println("");
+    }
+    public static void printInfo() {
+        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println("| Probability Function = exp(-(neighborDistance - currentDistance) / temperature) |");
+        System.out.println("| newtemperature = oldtemperature *(1-RATE_OF_COOLING)                            |");
+        System.out.print("| RATE_OF_COOLING = "+ SimmulatedAnnealing.RATE_OF_COOLING);
+        System.out.println("                                                         |");
+        System.out.println("----------------------------------------------------------------------------------");
     }
 }

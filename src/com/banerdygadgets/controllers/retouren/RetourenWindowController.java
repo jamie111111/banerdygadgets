@@ -11,47 +11,46 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
-public class RetourenWindowController implements Initializable {
+public class RetourenWindowController  {
     private static ObservableList<RetourOrder> retourLijst = FXCollections.observableArrayList();
-
-    DatabaseHandler handler;
-    @FXML
-    StackPane retourStackPane;
-
-    @FXML
-    private TableView<RetourOrder> tableviewRetouren;
-    @FXML
-    private TableColumn<RetourOrder, Integer> colRetourNr;
-    @FXML
-    private TableColumn<RetourOrder, Integer> colBestelNr;
-    @FXML
-    private TableColumn<RetourOrder, LocalDate> colDatum;
-    @FXML
-    private TableColumn<RetourOrder, String> colReden;
+    private static RetourenWindowController instance;
+    @FXML StackPane retourStackPane;
+    @FXML private TableView<RetourOrder> tableviewRetouren;
+    @FXML private TableColumn<RetourOrder, Integer> colRetourNr;
+    @FXML private TableColumn<RetourOrder, Integer> colBestelNr;
+    @FXML private TableColumn<RetourOrder, LocalDate> colDatum;
+    @FXML private TableColumn<RetourOrder, String> colReden;
     @FXML private TableColumn<RetourOrder, String> colStatus;
     @FXML private TableColumn<RetourOrder, Integer> colKlantNr;
     @FXML private ContextMenu tableViewContextMenu;
 
-
     public static RetourOrder selectedRetourOrder = null;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public RetourenWindowController() {
+
+        instance = this;
+    }
+    public static RetourenWindowController getInstance() {
+        if(instance == null) {
+            instance = new RetourenWindowController();
+        }
+        return instance;
+    }
+
+
+    public void initialize() {
         initCol();
         loadData();
 
@@ -205,13 +204,10 @@ public class RetourenWindowController implements Initializable {
                                     "succesvol aangepast");
                 }
                 loadData();
-
             } else {
                 System.out.println("Cancel gedrukt");
             }
         }
-
-
     }
 
     @FXML
@@ -228,7 +224,7 @@ public class RetourenWindowController implements Initializable {
             return selectedRetourOrder;
         }
     }
-    public static List<RetourOrder> getReadyForDispatchRetourOrders() {
+    public List<RetourOrder> getReadyForDispatchRetourOrders() {
         List<RetourOrder> retourOrders = new ArrayList<>();
         for (RetourOrder retourOrder : retourLijst) {
             if(retourOrder.getStatus().equals("Aangemeld")) {

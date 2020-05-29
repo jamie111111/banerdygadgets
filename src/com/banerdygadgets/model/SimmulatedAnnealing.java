@@ -13,10 +13,12 @@ public class SimmulatedAnnealing {
     public static String decisionString;
     private Route korsteRoute;
 
-
+    //Methode om de route te berekenen met begin temperatuur, en huidige route
     public Route findRoute(double temperature, Route currentRoute) throws IOException {
         Route shortestRoute = new Route(currentRoute);
         Route adjacentRoute;
+        //Loop vanaf ingestelde temperatuur,checkt of huidig route korter is dan de nieuw
+        // gevonden route,
         while (temperature > MIN_TEMPERATURE) {
             System.out.print(currentRoute + " | " + currentRoute.getTotalStringDistance() + " | "
                     + String.format("%.2f", temperature));
@@ -30,13 +32,10 @@ public class SimmulatedAnnealing {
 
             temperature *= 1 - RATE_OF_COOLING;
         }
-//        System.out.println("De meest optimale route = " + shortestRoute.toString()+ ", afstand: " + shortestRoute.getTotalStringDistance()) ;
         this.korsteRoute = shortestRoute;
         AlertFactory.showSimpleAlert("Optimale route berekening", "De optimale route is berekent " +
                 "en kan getoond en opgeslagen worden als pdf");
         return shortestRoute;
-
-
     }
 
     private boolean acceptRoute(double currentDistance, double adjacentDistance, double temperature) {

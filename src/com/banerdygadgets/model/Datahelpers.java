@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Datahelpers {
-
     public static boolean addRetourItem(RetourOrder retourOrder) throws SQLException {
 
         try {
             PreparedStatement statement =
-                    DatabaseHandler.getInstance().getConnection().prepareStatement(DatabaseStringQueries.INSERT_RETOURORDER);
+                    DatabaseHandler.getInstance().getConnection().prepareStatement("INSERT INTO " +
+                            "retourorder (datumAanmelding,status,reden,bestelId,klantId) VALUES" +
+                            "(?,?,?,?,?)");
             statement.setString(1,retourOrder.getStringDatumAanmelding());
             statement.setString(2,retourOrder.getStatus());
             statement.setString(3,retourOrder.getReden());
@@ -30,7 +31,8 @@ public class Datahelpers {
     public static boolean deleteRetourItem(RetourOrder retourOrder) {
         try {
             PreparedStatement statement =
-                    DatabaseHandler.getInstance().getConnection().prepareStatement(DatabaseStringQueries.DELETE_RETOURORDER);
+                    DatabaseHandler.getInstance().getConnection().prepareStatement("DELETE FROM " +
+                            "retourorder WHERE id=?");
             statement.setInt(1,retourOrder.getRetourNummer());
             int result = statement.executeUpdate();
             if(result == 1) {
@@ -38,7 +40,6 @@ public class Datahelpers {
             }
         }catch (SQLException e) {
             System.out.println(e.getMessage());
-            System.out.println(DatabaseStringQueries.DELETE_RETOURORDER);
         }
         return false;
     }
@@ -158,7 +159,7 @@ public class Datahelpers {
         }
         return false;
     }
-
+    //Method om klanten op te halen uit de database in een postcode gebied
     public static List<Klant> getSelectedKlantenWithPostcodeRange(int postcodeVan,
                                                                   int postcodeTot) {
         List<Klant> selectedKlantenInPostcodeRange = new ArrayList<>();
@@ -179,7 +180,7 @@ public class Datahelpers {
                 Klant klant = new Klant(klantId,naam,adres,huisnr,postcode,woonplaats);
                 selectedKlantenInPostcodeRange.add(klant);
             }
-            System.out.println(selectedKlantenInPostcodeRange);
+            System.out.println("line 183 Datahelpers" + selectedKlantenInPostcodeRange);
             return selectedKlantenInPostcodeRange;
         }catch (SQLException e) {
             System.out.println(e.getMessage());

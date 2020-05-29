@@ -14,13 +14,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Testapi {
+public class GoogleApi {
     private static ObservableList<Klant> verzendLijst;
     public static ObservableList<Geolocation> geoLocaties = FXCollections.observableArrayList();
 
     public static void geoCodeApi() {
+        //Haal verzendlijst vanuit de route pagina
         verzendLijst = RouteWindowController.getVerzendLijst();
-
+        // Loop door verzendlijst en de geolocaties op
         for (int counter = 0; counter <= verzendLijst.size() - 1; counter++) {
                 Klant klant = verzendLijst.get(counter);
             String adres = klant.getAdres()+"+"+klant.getHuisnr()+"+"+klant.getPostcode()+
