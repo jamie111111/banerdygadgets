@@ -1,6 +1,7 @@
 package com.banerdygadgets.model;
 
 import com.banerdygadgets.controllers.route.RouteWindowController;
+import com.banerdygadgets.helpers.AlertFactory;
 import com.banerdygadgets.helpers.GeoCodingApiHelper;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -15,7 +16,7 @@ import java.net.URL;
 
 public class Testapi {
     private static ObservableList<Klant> verzendLijst;
-public static ObservableList<Geolocation> geoLocaties = FXCollections.observableArrayList();
+    public static ObservableList<Geolocation> geoLocaties = FXCollections.observableArrayList();
 
     public static void geoCodeApi() {
         verzendLijst = RouteWindowController.getVerzendLijst();
@@ -60,6 +61,7 @@ public static ObservableList<Geolocation> geoLocaties = FXCollections.observable
                                 "Latitude: " + latitude + ", " +
                                 "Longitude: " + longitude);
                     }
+
                 }
             } catch(Exception e) {
                 System.out.println("Error: " + e.getMessage());
@@ -67,6 +69,7 @@ public static ObservableList<Geolocation> geoLocaties = FXCollections.observable
             }
 
         }
-
+        AlertFactory.showSimpleAlert("De geolocaties zijn opgehaald", "Geolocaties " +
+                "succesvol opgehaald");
     }
 }

@@ -214,6 +214,12 @@ public class RetourenWindowController implements Initializable {
 
     }
 
+    @FXML
+    private void onRefresh() {
+        loadData();
+        System.out.println("Data loaded");
+    }
+
     private  RetourOrder getSelectedRetourOrder() {
         if(tableviewRetouren.getSelectionModel().isEmpty()) {
             return null;

@@ -3,6 +3,7 @@ package com.banerdygadgets.controllers.route;
 import com.banerdygadgets.Main;
 import com.banerdygadgets.controllers.bestellingen.BestellingenController;
 import com.banerdygadgets.controllers.retouren.RetourenWindowController;
+import com.banerdygadgets.helpers.AlertFactory;
 import com.banerdygadgets.helpers.RouteHelpers;
 import com.banerdygadgets.model.*;
 import com.itextpdf.text.*;
@@ -35,7 +36,6 @@ import java.util.Optional;
 public class RouteWindowController  {
     private static ObservableList<Klant> verzendLijst = FXCollections.observableArrayList();
     private static PostcodeRange postcodeRange;
-    public static routeWindowFeedbackController ctrl;
 //    @FXML
 //    private ImageView imagePostcodes;
 
@@ -53,12 +53,7 @@ public class RouteWindowController  {
    public static String routelijst;
     StringBuilder html;
 
-
-
-
     @FXML private void initialize() throws FileNotFoundException {
-//        engine = webViewRoute.getEngine();
-
         loadData();
     }
     private void initCol() {
@@ -85,7 +80,6 @@ public class RouteWindowController  {
         engine.loadContent(url);
 
     }
-
 
     @FXML private void getOrdersWithReadyStatus() {
         Dialog<ButtonType> dialog = new Dialog<>();
@@ -135,36 +129,36 @@ public class RouteWindowController  {
             }
             //Laad klanten in het scherm
             loadData();
+            AlertFactory.showSimpleAlert("Klanten uit het gekozen postcodegebied zijn opgehaald",
+                    postcodeRange.toString());
         }else {
             System.out.println("Er is iets fout gegaan");
         }
     }
     @FXML
-    public void createDispatchList() throws IOException {
+    public void getGeoLocations() throws IOException {
     Testapi.geoCodeApi();
-
-
     }
+    //Een method om de gebruiker feedback te geven van de routeberekening
     public void getOptimalRoute() throws IOException, DocumentException {
         try {
             Parent algoView = FXMLLoader.load(Main.class.getResource("views/routing" +
                     "/route_algo_feedback.fxml"));
-
             Scene algoScene = new Scene(algoView,1100, 600);
             Stage stage = new Stage();
             stage.setScene(algoScene);
             stage.setTitle("Algoritme calculaties");
-//            stage.show();
+            stage.show();
         }catch (Exception e) {
             System.out.println("Can't load window " + e.getMessage());
         }
-
         Route route = new Route(Testapi.geoLocaties);
         FileDriver.printHeading(route);
         algo = new SimmulatedAnnealing();
         algo.findRoute(SimmulatedAnnealing.INITIAL_TEMPERATURE, route);
         exportAsPdf();
         FileDriver.printInfo();
+
     }
     public void exportAsPdf() throws IOException, DocumentException {
         String printData = "De meeste optimale route op volgorde:  \n" + "RouteWindowController " +
@@ -194,14 +188,6 @@ public class RouteWindowController  {
         document.add(new Paragraph("De meest optimale route voor de geselecteerde plaatsen: "));
         Rectangle rect = new Rectangle(0,0);
         document.close();
-        try {
-
-
-
-        }catch (NullPointerException e) {
-            System.out.println(e.getMessage());
-        }
-
     }
 
     public static ObservableList<Klant> getVerzendLijst() {

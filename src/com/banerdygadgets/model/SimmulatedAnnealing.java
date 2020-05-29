@@ -1,6 +1,6 @@
 package com.banerdygadgets.model;
 
-import com.banerdygadgets.controllers.route.routeWindowFeedbackController;
+import com.banerdygadgets.helpers.AlertFactory;
 
 import java.io.IOException;
 
@@ -24,24 +24,18 @@ public class SimmulatedAnnealing {
             adjacentRoute = obtainAdjacentRoute(new Route(currentRoute));
             if (currentRoute.getTotalDistance() < shortestRoute.getTotalDistance())
                 shortestRoute = new Route(currentRoute);
-            routeWindowFeedbackController.getInstance().getFeedbackList().add(new RouteAlgoFeedback(currentRoute.toStringPlacesAndPostals(),
-                    currentRoute.getTotalStringDistance(),String.format("%.2f", temperature),
-                    acceptanceProbabilityString,randomNumber,decisionString));
-            routeWindowFeedbackController.getInstance().loadData();
-
 
             if (acceptRoute(currentRoute.getTotalDistance(), adjacentRoute.getTotalDistance(), temperature))
                 currentRoute = new Route(adjacentRoute);
-            routeWindowFeedbackController.getInstance().getFeedbackList().add(new RouteAlgoFeedback(currentRoute.toString(),
-                    currentRoute.getTotalStringDistance(),String.format("%.2f", temperature),
-                    acceptanceProbabilityString,randomNumber,decisionString));
-            routeWindowFeedbackController.getInstance().loadData();
+
             temperature *= 1 - RATE_OF_COOLING;
         }
-        routeWindowFeedbackController.getInstance().loadData();
 //        System.out.println("De meest optimale route = " + shortestRoute.toString()+ ", afstand: " + shortestRoute.getTotalStringDistance()) ;
         this.korsteRoute = shortestRoute;
+        AlertFactory.showSimpleAlert("Optimale route berekening", "De optimale route is berekent " +
+                "en kan getoond en opgeslagen worden als pdf");
         return shortestRoute;
+
 
     }
 

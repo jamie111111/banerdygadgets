@@ -44,7 +44,7 @@ public class KlantenViewController {
     public static boolean selectedAddKlant = false;
 
     @FXML private void initialize() {
-        colKlantNr.setStyle( "-fx-alignment: CENTER;");
+
         initCol();
         loadData();
     }

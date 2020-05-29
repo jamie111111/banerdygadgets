@@ -10,7 +10,7 @@
    <children>
       <HBox alignment="TOP_RIGHT" fillHeight="false" prefHeight="45.0" prefWidth="600.0" style="-fx-cursor: hand; -fx-background-color: ACDF87; -fx-border-color: black;" stylesheets="@../../styles.css">
           <children>
-              <Label maxWidth="1.7976931348623157E308" text="Nerdygadgets" HBox.hgrow="ALWAYS">
+              <Label maxWidth="1.7976931348623157E308" text="NerdyGadgets" HBox.hgrow="ALWAYS">
                   <HBox.margin>
                       <Insets top="5.0" />
                   </HBox.margin>

@@ -1,39 +1,6 @@
 package com.banerdygadgets.model;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
 public class GeoCode {
-
-    static ObservableList<Geolocation> populateInitialRoute() {
-        ObservableList<Geolocation> initialRoute = FXCollections.observableArrayList();
-        BufferedReader bufferedReader = null;
-        try {
-            bufferedReader = new BufferedReader(new FileReader("Geolocations.txt"));
-            String line = bufferedReader.readLine();
-            while (line != null) {
-                String[] split = line.split(",");
-                initialRoute.add(new Geolocation(split[0].trim(), Double.valueOf(split[1].trim()),
-                        Double.valueOf(split[2].trim())));
-                line = bufferedReader.readLine();
-            }
-        } catch (IOException e) {e.printStackTrace();}
-        finally {
-            try {bufferedReader.close();}
-            catch (IOException e) { e.printStackTrace();}
-        }
-        return initialRoute;
-    }
-
-    public static void main(String[] args) {
-        FileDriver driver = new FileDriver();
-        Route route = new Route(populateInitialRoute());
-        printHeading(route);
-    }
     public static void printHeading(Route route) {
         String headingColumn1 = "Route";
         String remainingHeadingColumns = "Afstand |  Temperatuur  | Probility function | Random " +

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.web.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.WebView?>
 
-<StackPane fx:id="routeWindowPane" prefHeight="750.0" prefWidth="1300.0" style="-fx-background-color: white;" stylesheets="@../../styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.route.RouteWindowController">
+<StackPane fx:id="routeWindowPane" prefHeight="750.0" prefWidth="1300.0" style="-fx-background-color: white;" stylesheets="@../../styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.route.RouteWindowController">
    <children>
       <VBox prefHeight="591.0" prefWidth="1041.0">
          <children>
@@ -14,7 +18,7 @@
                <children>
                   <HBox fx:id="Hbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                      <children>
-                        <TableView fx:id="verzendlijstTableView" prefHeight="236.0" prefWidth="550.0" stylesheets="@../../styles.css">
+                        <TableView fx:id="verzendlijstTableView" prefHeight="236.0" prefWidth="700.0" stylesheets="@../../styles.css">
                           <columns>
                             <TableColumn id="center" fx:id="klantNrField" prefWidth="75.0" styleClass="center" text="Klantnr" />
                             <TableColumn fx:id="naamField" prefWidth="75.0" text="Naam" />
@@ -27,19 +31,15 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <ScrollPane style="-fx-background-color: grey;" HBox.hgrow="ALWAYS">
-                           <content>
-                              <WebView fx:id="webViewRoute" />
-                           </content>
-                        </ScrollPane>
+                        <WebView fx:id="webViewRoute" />
                      </children>
                   </HBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="31.0" prefWidth="938.0" spacing="50.0" style="-fx-background-color: white;" stylesheets="@../../styles.css">
+            <HBox alignment="CENTER" prefHeight="31.0" prefWidth="938.0" spacing="5.0" style="-fx-background-color: white;" stylesheets="@../../styles.css">
                <children>
                   <Button id="btn" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#getOrdersWithReadyStatus" prefHeight="53.0" prefWidth="200.0" styleClass="btn-route" stylesheets="@../../styles.css" text="Ophalen verzendorders" />
-                  <Button mnemonicParsing="false" onAction="#createDispatchList" styleClass="btn-route" text="Ophalen locaties">
+                  <Button mnemonicParsing="false" onAction="#getGeoLocations" styleClass="btn-route" text="Ophalen locaties">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

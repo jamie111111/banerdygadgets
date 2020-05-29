@@ -7,6 +7,7 @@ public class Geolocation {
     private double latitude;
     private String plaats;
     private String postcode;
+
     public Geolocation(String name, double latitude, double longitude){
         this.plaats = name;
         this.longitude = longitude * CONVERT_DEGREES_TO_RADIANS;
@@ -50,5 +51,8 @@ public class Geolocation {
     }
     public String toStringPlaatsEnPostcode() {
         return this.plaats + this.postcode;
+    }
+    public String toStringGeocodes() {
+        return "Breedtegraad: " + this.latitude + ", Lengtegraad: " + this.longitude;
     }
 }

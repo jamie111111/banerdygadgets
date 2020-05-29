@@ -3,7 +3,7 @@
     -fx-cursor:hand;
 }
 .center_column {
--fx-alignment: CENTER;
+    -fx-alignment: CENTER;
 }
 
 .btn {

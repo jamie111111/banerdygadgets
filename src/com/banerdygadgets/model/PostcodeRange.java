@@ -16,4 +16,9 @@ public class PostcodeRange {
     public int getPostcodeTot() {
         return postcodeTot;
     }
+
+    @Override
+    public String toString() {
+        return "Postcode gebied: " + postcodeVan + " tot " + postcodeTot;
+    }
 }

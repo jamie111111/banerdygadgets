@@ -7,7 +7,6 @@ import java.sql.*;
 
 public final class DatabaseHandler {
     private static DatabaseHandler dHandler = null;
-    private static DatabaseConfiguration dconfig;
     private static Connection conn = null;
     private static Statement stmt = null;
     private static final String hostName = "jdbc:mysql://localhost:3306/";

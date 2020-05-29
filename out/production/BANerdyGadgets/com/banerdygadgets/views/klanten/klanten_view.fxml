@@ -6,17 +6,17 @@
 
 <StackPane fx:id="klantStackPane" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banerdygadgets.controllers.klanten.KlantenViewController">
     <children>
-        <VBox>
+        <VBox stylesheets="@../../styles.css">
             <children>
                 <fx:include fx:id="navigation" source="../navigation/Navigation.fxml" />
                 <TableView fx:id="tableViewKlant" stylesheets="@../../styles.css" VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn fx:id="colKlantNr" prefWidth="75.0" styleClass="center" text="Klantnr" />
-                        <TableColumn fx:id="colVolledigeNaam" prefWidth="96.0" text="Volledige naam" />
-                        <TableColumn fx:id="colAdres" prefWidth="125.0" text="Adres" />
-                  <TableColumn fx:id="colHuisNr" prefWidth="75.0" text="Huisnr" />
-                        <TableColumn fx:id="colPostcode" minWidth="-1.0" prefWidth="180.0" text="Postcode" />
-                        <TableColumn fx:id="colWoonplaats" prefWidth="115.0" resizable="false" text="Woonplaats" />
+                        <TableColumn fx:id="colKlantNr" prefWidth="75.0" styleClass="center_column" text="Klantnr" />
+                        <TableColumn fx:id="colVolledigeNaam" prefWidth="96.0" styleClass="center_column" text="Volledige naam" />
+                        <TableColumn fx:id="colAdres" prefWidth="125.0" styleClass="center_column" text="Adres" />
+                  <TableColumn fx:id="colHuisNr" prefWidth="75.0" styleClass="center_column" text="Huisnr" />
+                        <TableColumn fx:id="colPostcode" minWidth="-1.0" prefWidth="180.0" styleClass="center_column" text="Postcode" />
+                        <TableColumn fx:id="colWoonplaats" prefWidth="115.0" resizable="false" styleClass="center_column" text="Woonplaats" />
                     </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
