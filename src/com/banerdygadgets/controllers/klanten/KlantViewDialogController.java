@@ -35,8 +35,8 @@ public class KlantViewDialogController {
 
     }
 
-    private void setKlantenFields(int klantnr,String fullName,String adres,String postcode,
-                                  String huisnr,
+    private void setKlantenFields(int klantnr,String fullName,String adres,String huisnr,
+                                  String postcode,
                              String woonplaats) {
         klantnrField.setText(Integer.toString(klantnr));
         fullNameField.setText(fullName);

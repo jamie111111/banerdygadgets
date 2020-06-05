@@ -115,9 +115,8 @@ public class KlantenViewController {
                                     " is " +
                                     "succesvol aangepast");
                     loadData();
-                    System.out.println(rs);
                 }
-
+                loadData();
             } else {
                 System.out.println("Cancel gedrukt");
             }

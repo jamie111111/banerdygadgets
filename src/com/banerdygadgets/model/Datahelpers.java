@@ -1,5 +1,8 @@
 package com.banerdygadgets.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -93,9 +96,10 @@ public class Datahelpers {
         try {
             PreparedStatement statement =
                     DatabaseHandler.getInstance().getConnection().prepareStatement("" +
-                            "UPDATE bestelling SET status=? WHERE bestellingId=?");
+                            "UPDATE bestelling SET status=?,klantId=? WHERE bestellingId=?");
             statement.setString(1,bestelling.getStatus());
-            statement.setInt(2,bestelling.getBestellingId());
+            statement.setString(2,bestelling.getStringKlantId());
+            statement.setInt(3,bestelling.getBestellingId());
             int result = statement.executeUpdate();
             if(result == 1) {
                 return true;
@@ -114,8 +118,8 @@ public class Datahelpers {
                     "klantId=?");
             statement.setString(1,klant.getFullName());
             statement.setString(2,klant.getAdres());
-            statement.setString(3,klant.getHuisnr());
-            statement.setString(4,klant.getPostcode());
+            statement.setString(4,klant.getHuisnr());
+            statement.setString(3,klant.getPostcode());
             statement.setString(5,klant.getWoonplaats());
             statement.setInt(6,klant.getKlantId());
             int result = statement.executeUpdate();
@@ -131,7 +135,7 @@ public class Datahelpers {
     public static boolean addKlant(Klant klant) {
         try {
             PreparedStatement statement = DatabaseHandler.getInstance().getConnection().prepareStatement(
-               "INSERT INTO klant(fullName,adres,postcode,woonplaats) VALUES(?,?,?,?,?)");
+               "INSERT INTO klant(fullName,adres,huisnr,postcode,woonplaats) VALUES(?,?,?,?,?)");
             statement.setString(1,klant.getFullName());
             statement.setString(2,klant.getAdres());
             statement.setString(3,klant.getHuisnr());
@@ -205,7 +209,51 @@ public class Datahelpers {
         LocalDate formattedDate = LocalDate.parse(datum,formatter);
         return formattedDate;
     }
-
-
-
-}
+    public static ObservableList<Bestelling> loadBestellingen() {
+        ObservableList<Bestelling> bestelLijst = FXCollections.observableArrayList();
+        DatabaseHandler handler = DatabaseHandler.getInstance();
+        String query = "SELECT * FROM BESTELLING";
+        ResultSet results = handler.executeQuery(query);
+        try{
+            while (results.next()) {
+                int bestellingId = results.getInt("bestellingId");
+                int klantId = results.getInt("klantId");
+                String datum = results.getString("datum");
+                String status = results.getString("status");
+                LocalDate formattedDatum = Datahelpers.parseDate(datum);
+                Bestelling bestelling = new Bestelling(bestellingId,klantId,formattedDatum,status);
+                bestelLijst.add(bestelling);
+            }
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return bestelLijst;
+    }
+    public static ObservableList<RetourOrder> loadRetouren()  {
+        ObservableList<RetourOrder> retourLijst = FXCollections.observableArrayList();
+        DatabaseHandler handler = DatabaseHandler.getInstance();
+        String query = "SELECT * FROM retourorder";
+        ResultSet rs = handler.executeQuery(query);
+        try {
+            while (rs.next()) {
+                String date = rs.getString("datumAanmelding");
+                LocalDate formattedDate = Datahelpers.parseDate(date);
+                int retourNr = rs.getInt("id");
+                String reden = rs.getString("reden");
+                String status = rs.getString("status");
+                int bestelnr = rs.getInt("bestelId");
+                int klantnr = rs.getInt("klantId");
+                RetourOrder retourOrder = new RetourOrder(retourNr,
+                        formattedDate,
+                        status,
+                        reden,
+                        bestelnr,
+                        klantnr);
+                retourLijst.add(retourOrder);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            }
+        return retourLijst;
+     }
+    }

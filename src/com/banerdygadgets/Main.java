@@ -1,8 +1,5 @@
 package com.banerdygadgets;
 
-import com.banerdygadgets.controllers.bestellingen.BestellingenController;
-import com.banerdygadgets.controllers.klanten.KlantenViewController;
-import com.banerdygadgets.controllers.retouren.RetourenWindowController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,5 +17,11 @@ public class Main extends Application {
     }
     public static void main(String[] args) {
         launch(args);
+//       if( DatabaseHandler.getInstance().createConnection()) {
+//           BestellingenController.getInstance().loadBestellingonStartup();
+//           RetourenWindowController.getInstance().loadRetourData();
+//       };
+
+
     }
 }

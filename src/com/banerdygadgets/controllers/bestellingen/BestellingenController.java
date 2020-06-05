@@ -45,6 +45,10 @@ public class BestellingenController {
         return instance;
     }
 
+    public void loadBestellingonStartup() {
+        bestelLijst = Datahelpers.loadBestellingen();
+    }
+
     //Haal bestelling op met een verzendklaar status
     public List<Bestelling> getReadyBestellingen() {
         List<Bestelling> verzendklaarLijst = new ArrayList<>();
@@ -71,21 +75,23 @@ public class BestellingenController {
         bestelLijst.clear();
         DatabaseHandler handler = DatabaseHandler.getInstance();
         String query = "SELECT * FROM BESTELLING";
-        ResultSet results = handler.executeQuery(query);
-        try{
-            while (results.next()) {
-                int bestellingId = results.getInt("bestellingId");
-                int klantId = results.getInt("klantId");
-                String datum = results.getString("datum");
-                String status = results.getString("status");
-                LocalDate formattedDatum = Datahelpers.parseDate(datum);
-                Bestelling bestelling = new Bestelling(bestellingId,klantId,formattedDatum,status);
-                bestelLijst.add(bestelling);
-            }
-        }catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        tableViewBestelling.setItems(bestelLijst);
+               ResultSet results = handler.executeQuery(query);
+               try{
+                   while (results.next()) {
+                       int bestellingId = results.getInt("bestellingId");
+                        int klantId = results.getInt("klantId");
+                       String datum = results.getString("datum");
+                        String status = results.getString("status");
+                        LocalDate formattedDatum = Datahelpers.parseDate(datum);
+                        Bestelling bestelling = new Bestelling(bestellingId,klantId,
+         formattedDatum,status);
+                        bestelLijst.add(bestelling);
+                   }
+                }catch (SQLException e) {
+                   System.out.println(e.getMessage());
+                }
+
+       tableViewBestelling.setItems(bestelLijst);
     }
 
     @FXML private void onAddBestelling() {

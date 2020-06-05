@@ -64,6 +64,9 @@ public class RetourenWindowController  {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colKlantNr.setCellValueFactory(new PropertyValueFactory<>("klantNummer"));
     }
+    public void loadRetourData() {
+        retourLijst = Datahelpers.loadRetouren();
+    }
     private void loadData() {
         retourLijst.clear();
         try {

@@ -1,5 +1,8 @@
 package com.banerdygadgets.controllers.navigation;
+
 import com.banerdygadgets.Main;
+import com.banerdygadgets.controllers.bestellingen.BestellingenController;
+import com.banerdygadgets.controllers.retouren.RetourenWindowController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +33,8 @@ public class NavigationController implements Initializable {
     }
     @FXML
     public void navigateToRoute(ActionEvent event) {
+        BestellingenController.getInstance().loadBestellingonStartup();
+        RetourenWindowController.getInstance().loadRetourData();
         setWindow("views/routing/route_window.fxml", event);
     }
 

@@ -128,51 +128,71 @@ public class RouteWindowController  {
     }
     @FXML
     private void getGeoLocations() throws IOException {
-    GoogleApi.geoCodeApi();
+        GoogleApi.geoLocaties.clear();
+        if(!verzendLijst.isEmpty()) {
+            GoogleApi.geoCodeApi();
+        }else {
+            AlertFactory.showSimpleErrorMessage("Waarschuwing","Geen verzendorders geselecteerd",
+                    "Haal eerst verzendorders op om de geolocaties op te halen");
+        }
+
     }
     //Een method om de gebruiker feedback te geven van de routeberekening
     public void getOptimalRoute() throws IOException, DocumentException {
-        Route route = new Route(GoogleApi.geoLocaties);
-        //Print de header voor de uitkomsten van de berekening in console
-        Printer.printHeading(route);
-        //instantieer algo en vind de meest optimale route
-        algo = new SimmulatedAnnealing();
-        algo.findRoute(SimmulatedAnnealing.INITIAL_TEMPERATURE, route);
-        //Exporteer naar pdf
-        //print informatie over berekening in console
-        Printer.printInfo();
+        if(GoogleApi.geoLocaties.isEmpty()) {
+            AlertFactory.showSimpleErrorMessage("Waarschuwing","Geen verzendorders","Haal eerst " +
+                    "verzendorders en of geolocaties op");
+        }else {
+            Route route = new Route(GoogleApi.geoLocaties);
+            //Print de header voor de uitkomsten van de berekening in console
+            Printer.printHeading(route);
+            //instantieer algo en vind de meest optimale route
+            algo = new SimmulatedAnnealing();
+            algo.findRoute(SimmulatedAnnealing.INITIAL_TEMPERATURE,
+                    route);
+            //Exporteer naar pdf
+            //print informatie over berekening in console
+            Printer.printInfo();
+        }
 
     }
     //Methode om route uit te printen naar pdf, wordt nu opgeslagen in working directory
     public void exportAsPdf() throws IOException, DocumentException {
-        StringBuilder url = new StringBuilder("https://www.google.nl/maps/dir");
-        //Maak lijst voor de pdf
-        com.itextpdf.text.List list = new com.itextpdf.text.List(true,20);
-        com.itextpdf.text.ListItem item;
-        ObservableList<Geolocation> route = algo.getKorsteRoute().getCities();
-        for(Geolocation locatie:route) {
-            item = new com.itextpdf.text.ListItem(locatie.toStringPlaatsEnPostcode());
-            list.add(item);
-            url.append("/" + locatie.returnPostcode());
+        if(GoogleApi.geoLocaties.isEmpty()) {
+            AlertFactory.showSimpleErrorMessage("Waarschuwing","Geen verzendorders","Haal eerst " +
+                    "verzendorders en of geolocaties en en dan bereken route");
+        }else {
+            StringBuilder url = new StringBuilder("https://www.google.nl/maps/dir");
+            //Maak lijst voor de pdf
+            com.itextpdf.text.List list = new com.itextpdf.text.List(true,
+                    20);
+            com.itextpdf.text.ListItem item;
+            ObservableList<Geolocation> route = algo.getKorsteRoute().getCities();
+            for (Geolocation locatie : route) {
+                item = new com.itextpdf.text.ListItem(locatie.toStringPlaatsEnPostcode());
+                list.add(item);
+                url.append("/" + locatie.returnPostcode());
+            }
+            url.append("/" + route.get(0).returnPostcode());
+            System.out.println("line 189 " + url);
+            Document document = new Document(PageSize.A4);
+            PdfWriter.getInstance(document,
+                    new FileOutputStream("route.pdf"));
+            document.open();
+            document.add(new Paragraph("De meest optimale route voor de geselecteerde plaatsen: "));
+            document.add(Chunk.NEWLINE);
+            document.add(list);
+            document.add(Chunk.NEWLINE);
+            //Url naar google maps
+            Chunk chunk = new Chunk("Link naar googlemaps route beschrijving");
+            chunk.setAnchor(url.toString());
+            //        document.add(new Paragraph(url.toString()));
+            document.add(chunk);
+            document.close();
+            AlertFactory.showSimpleAlert("Route opgeslagen",
+                    "De route is opgeslagen als pdf met een " +
+                            "link naar googlemaps voor de koerier");
         }
-        url.append("/"+ route.get(0).returnPostcode());
-        System.out.println("line 189 " + url);
-        Document document = new Document(PageSize.A4);
-        PdfWriter.getInstance(document,
-                new FileOutputStream("route.pdf"));
-        document.open();
-        document.add(new Paragraph("De meest optimale route voor de geselecteerde plaatsen: "));
-        document.add(Chunk.NEWLINE);
-        document.add(list);
-        document.add(Chunk.NEWLINE);
-        //Url naar google maps
-        Chunk chunk = new Chunk("Link naar googlemaps route beschrijving");
-        chunk.setAnchor(url.toString());
-//        document.add(new Paragraph(url.toString()));
-        document.add(chunk);
-        document.close();
-        AlertFactory.showSimpleAlert("Route opgeslagen","De route is opgeslagen als pdf met een " +
-                "link naar googlemaps voor de koerier");
     }
 
     public static ObservableList<Klant> getVerzendLijst() {
@@ -180,18 +200,24 @@ public class RouteWindowController  {
     }
 
     public void showRoute() { // Methode om route in google maps zien in de app
-        ObservableList<Geolocation> route = algo.getKorsteRoute().getCities();
-        System.out.println(route.toString());
-        StringBuilder htmlString = RouteHelpers.getInstance().htmlStringBuilder(route);
-        for(int i = 1;i<route.size();i++ ) {
-            if (i > 1) {htmlString.append("|");
+        if(GoogleApi.geoLocaties.isEmpty()) {
+            AlertFactory.showSimpleErrorMessage("Waarschuwing","Geen verzendorders","Haal eerst " +
+                    "verzendorders en of geolocaties en en dan bereken route");
+        }else {
+            ObservableList<Geolocation> route = algo.getKorsteRoute().getCities();
+            System.out.println(route.toString());
+            StringBuilder htmlString = RouteHelpers.getInstance().htmlStringBuilder(route);
+            for (int i = 1; i < route.size(); i++) {
+                if (i > 1) {
+                    htmlString.append("|");
+                }
+                htmlString.append(route.get(i).returnPostcode());
             }
-            htmlString.append(route.get(i).returnPostcode());
+            htmlString.append("\" allowfullscreen></iframe>");
+            htmlString.append("</body>");
+            htmlString.append("</html>");
+            loadRouteWebpage(htmlString.toString());
         }
-        htmlString.append("\" allowfullscreen></iframe>");
-        htmlString.append("</body>");
-        htmlString.append("</html>");
-        loadRouteWebpage(htmlString.toString());
     }
 
 

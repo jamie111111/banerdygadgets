@@ -28,14 +28,15 @@ public final class DatabaseHandler {
         return dHandler;
     }
 
-    private static void createConnection() {
+    public boolean createConnection() {
         try {
             conn = DriverManager.getConnection(url,user,password);
-
+            return true;
         }catch (SQLException e){
             AlertFactory.showSimpleErrorMessage("Foutmelding","Geen connectie","Er zijn verbindingsproblemen met de " +
                     "database");
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
